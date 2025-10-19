@@ -1,5 +1,6 @@
 process clean_reads {
 	tag 'qc'
+	conda '/home/james/miniconda3/envs/bacteria_meta'
 	publishDir "${params.outdir}/qc/clean_reads", mode: 'copy'
 
 	input:

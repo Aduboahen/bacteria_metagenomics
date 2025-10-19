@@ -1,18 +1,17 @@
 process abundance_estimation {
 	tag 'abundance_estimation'
-	publishDir "${params.outdir}/abundance", mode: 'copy', pattern: "*.tsv"
+	conda '/home/james/miniconda3/envs/bacteria_meta'
+	publishDir "${params.outdir}/abundance", mode: 'copy', pattern: "*.bracken*"
 
 	input:
-		path taxa_file // 'Taxonomic assignment file from Kraken2'
-		path read // 'Input read file (fastq)'
+		path kraken_report // 'Taxonomic assignment reportt from Kraken2'
 
 	output:
-		path "${params.sampleid}_abundance.tsv", emit: abundance_file // 'Abundance estimation results'
+		path "${params.sampleid}.bracken.report", emit: bracken_report // 'Bracken report file'
+		path "${params.sampleid}.bracken", emit: bracken_file // 'Bracken output file'
 
 	script:
 		"""
-		bracken -d -i ${taxa_file} -o ${params.sampleid}_abundance.txt \
-		-w ${params.sampleid}_bracken.report
+		bracken -d ${params.KRAKEN2_DB} -i ${kraken_report} -o ${params.sampleid}.bracken -w ${params.sampleid}.bracken.report -r 200
 		"""
-
 }
