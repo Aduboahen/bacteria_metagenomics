@@ -5,3 +5,9 @@ sub12
 meta_tools
 *nextflow*
 work
+results
+.nextflow*
+ERR*
+k2_*
+vamb*
+results*
