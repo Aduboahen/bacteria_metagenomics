@@ -15,7 +15,7 @@ params.KRAKEN2_DB = "/home/james/repos/github/metagenome/k2_standard_16_GB_20250
 include {clean_reads} from '../modules/qc'
 include {assign_taxa; extract_human_reads} from '../modules/assign_taxa'
 include {assemble_mags} from '../modules/assemble_mags'
-include {abundance_estimation} from '../modules/count_matrix'
+include {abundance_estimation} from '../modules/abundance_correction'
 
 workflow {
 		log.info"""
