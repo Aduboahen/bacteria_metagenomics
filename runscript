@@ -1,0 +1,13 @@
+#!/bin/zsh
+
+
+eza inputs/*.fastq | xargs -I % sh -c 'base=$(basename % .fastq); ${PWD}/workflows/assemble_reads_generate_MAGS.nf --sampleid ${base} --outdir ${PWD}/results --inputdir ${PWD}/inputs -resume'
+
+${PWD}/workflows/create_MAG_catalogue.nf --outdir ${PWD}/results -resume
+
+eza inputs/*.fastq | xargs -I % sh -c 'base=$(basename % .fastq); ${PWD}/workflows/mapping_mags.nf --sampleid ${base} --outdir ${PWD}/results -resume'
+
+# if [ -e ${PWD/results/vamb ]
+# then mkdir ${}
+
+${PWD}/workflows/binning_classification.nf --outdir ${PWD}/results -resume
