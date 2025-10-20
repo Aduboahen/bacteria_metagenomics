@@ -24,8 +24,8 @@ workflow {
 			========Sources===============
 			codeBase  	: $projectDir
 			sample    	: $params.sampleid
-			reads     	: $params.inputdir
-			outDir    	: $params.outdir
+			inputdir     	: $params.inputdir
+			outdir    	: $params.outdir
 			KRAKEN2 DB 	: $params.KRAKEN2_DB
 			threads   	: $params.threads
 
@@ -38,7 +38,7 @@ workflow {
 			oseimensa@kccr.de
 		"""
 
-		fastq = Channel.fromPath("${params.inputdir}/${params.sampleid}.fastq").ifEmpty{"no such file"}
+		fastq = Channel.fromPath("${params.inputdir}/${params.sampleid}.fastq.gz").ifEmpty{"no such file"}
 		clean_reads(fastq)
 		assign_taxa(clean_reads.out.read)
 		extract_human_reads(clean_reads.out.read, assign_taxa.out.taxa_file)
