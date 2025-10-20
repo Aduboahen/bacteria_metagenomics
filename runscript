@@ -1,13 +1,17 @@
 #!/bin/zsh
 
 
-eza inputs/*.fastq | xargs -I % sh -c 'base=$(basename % .fastq); ${PWD}/workflows/assemble_reads_generate_MAGS.nf --sampleid ${base} --outdir ${PWD}/results --inputdir ${PWD}/inputs -resume'
+eza input/ | xargs -I % sh -c 'base=$(basename % .fastq.gz); ${PWD}/workflows/assemble_reads_generate_MAGS.nf --sampleid ${base} --outdir ${PWD}/results --inputdir ${PWD}/input -resume'
 
 ${PWD}/workflows/create_MAG_catalogue.nf --outdir ${PWD}/results -resume
 
-eza inputs/*.fastq | xargs -I % sh -c 'base=$(basename % .fastq); ${PWD}/workflows/mapping_mags.nf --sampleid ${base} --outdir ${PWD}/results -resume'
+eza input/ | xargs -I % sh -c 'base=$(basename % .fastq.gz); ${PWD}/workflows/mapping_mags.nf --sampleid ${base} --outdir ${PWD}/results -resume'
 
-# if [ -e ${PWD/results/vamb ]
-# then mkdir ${}
+# if  ${PWD}/results/vamb exist rename it to ${PWD}/results/vamb_old to avoid overwriting previous results
+
+if [ -d "${PWD}/results/vamb" ]; then
+		echo "Directory ${PWD}/results/vamb exists. Renaming to vamb_old."
+		mv ${PWD}/results/vamb ${PWD}/results/vamb_old
+fi
 
 ${PWD}/workflows/binning_classification.nf --outdir ${PWD}/results -resume
