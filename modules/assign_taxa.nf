@@ -1,7 +1,7 @@
 process assign_taxa {
 	tag 'assign_taxa'
 	conda '/home/james/miniconda3/envs/bacteria_meta'
-	publishDir "${params.outdir}/kraken/taxa", mode: 'copy', pattern: "*kraken2"
+	publishDir "${params.outdir}/kraken/abundance", mode: 'copy', pattern: "*kraken2"
 	publishDir "${params.outdir}/kraken/report", mode: 'copy', pattern: "*.k2report"
 	publishDir "${params.outdir}/kraken/classified", mode: 'copy', pattern: "*_classified.fastq"
 	publishDir "${params.outdir}/kraken/unclassified", mode: 'copy', pattern: "*_unclassified.fastq"
@@ -20,8 +20,8 @@ process assign_taxa {
 		kraken2 --db ${params.KRAKEN2_DB} --report ${params.sampleid}.k2report \
 		--classified-out ${params.sampleid}_classified.fastq \
 		--unclassified-out ${params.sampleid}_unclassified.fastq \
-		--output ${params.sampleid}.kraken2 \
-		--report-minimizer-data --use-names --threads ${params.threads} ${read}
+		--output ${params.sampleid}.kraken2 --report-minimizer-data --use-names \
+		--threads ${params.threads} --memory-mapping ${read}
 		"""
 }
 

@@ -11,7 +11,7 @@ process	assemble_mags {
 
 	script:
 		"""
-		flye --nano-hq ${read} -o ${params.sampleid} --threads ${params.threads}
+		flye --nano-hq ${read} -o ${params.sampleid} --meta --threads ${params.threads}
 
 		mv "${params.sampleid}/assembly.fasta" "${params.sampleid}/${params.sampleid}.assembly.fasta"
 		"""

@@ -1,7 +1,7 @@
 process abundance_estimation {
 	tag 'abundance_estimation'
 	conda '/home/james/miniconda3/envs/bacteria_meta'
-	publishDir "${params.outdir}/abundance", mode: 'copy', pattern: "*.bracken*"
+	publishDir "${params.outdir}/abundance_bracken", mode: 'copy', pattern: "*.bracken*"
 
 	input:
 		path kraken_report // 'Taxonomic assignment reportt from Kraken2'
@@ -12,6 +12,28 @@ process abundance_estimation {
 
 	script:
 		"""
-		bracken -d ${params.KRAKEN2_DB} -i ${kraken_report} -o ${params.sampleid}.bracken -w ${params.sampleid}.bracken.report -r 200
+		bracken -d ${params.KRAKEN2_DB} -i ${kraken_report} -o ${params.sampleid}.bracken -w ${params.sampleid}.breport -r 1000 -l S -t ${params.threads}
 		"""
+}
+
+process visualise_abundance{
+	tag 'visualise abundance'
+	conda '/home/james/miniconda3/envs/bacteria_meta'
+	publishDir "${params.outdir}/krona", mode: 'copy', pattern: "*"
+
+	input:
+		path bracken_report // 'Path to abundance file from bracken'4
+
+	output:
+		path "${params.sampleid}.krona" // bracken report converted to krona format
+		path "${params.sampleid}.krona.html" // krona plot
+
+
+	script:
+		"""
+		kreport2krona.py -r ${bracken_report} -o ${params.sampleid}.krona
+
+		ktImportText ${params.sampleid}.krona -o ${params.sampleid}.krona.html
+		"""
+
 }

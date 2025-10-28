@@ -2,10 +2,12 @@
 
 nextflow.enable.dsl=2
 
-params.outdir 		= "${params.outdir}"
+params.outdir 		= "/home/james/repos/github/metagenome/results"
 params.threads 		= 10
 params.KRAKEN2_DB = "$projectDir/k2_standard_16_GB_20250714" // path to kraken2 database
 params.magsdir 		= "${params.outdir}/mags/**/*.assembly.fasta"
+
+
 // module
 include {concat_mags} from '../modules/concatenate_mags'
 
@@ -25,6 +27,6 @@ workflow {
 			oseimensa@kccr.de
 		"""
 
-		mag_files = Channel.fromPath("${params.magsdir}").collect()
+		mag_files = channel.fromPath("${params.magsdir}").collect()
     concat_mags(mag_files)
 }

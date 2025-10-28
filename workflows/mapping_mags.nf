@@ -2,7 +2,7 @@
 
 nextflow.enable.dsl = 2
 
-params.outdir = "${params.outdir}"
+params.outdir = "/home/james/repos/github/metagenome/results"
 params.sampleid = "${params.sampleid}"
 params.threads = 10
 params.mag_catalogue = "${params.outdir}/mags/mags_catalogue.fna"
