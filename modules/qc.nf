@@ -36,6 +36,7 @@ process bin_qc{
 
 	script:
 		"""
-		checkm2 predict --input ${bin_dir} --output-directory "checkm"	--threads ${params.threads} --allmodels --database_path ${params.CHECKMDB} --resume
+		checkm2 predict --input $bin_dir --output-directory "checkm" --database_path ${params.CHECKMDB} \
+		--allmodels --threads ${params.threads} --force
 		"""
 }
