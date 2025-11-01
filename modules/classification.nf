@@ -5,7 +5,7 @@ process classify {
 	publishDir "${params.outdir}/classification", mode: 'copy', pattern: "*.kraken"
 
 	input:
-		path mag_files // 'Input reads file (fastq)'
+		path mag_files // MAG bins from vamb
 
 	script:
 		"""
