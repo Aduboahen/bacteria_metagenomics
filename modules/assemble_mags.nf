@@ -13,6 +13,8 @@ process	assemble_mags {
 		"""
 		flye --nano-hq ${read} -o ${params.sampleid} --meta --threads ${params.threads}
 
-		mv "${params.sampleid}/assembly.fasta" "${params.sampleid}/${params.sampleid}.assembly.fasta"
+		awk -v s="${params.sampleid}_" '/^>/ {\$0=">" s substr(\$0,2)} 1 ' ${params.sampleid}/assembly.fasta > ${params.sampleid}/assembly_renamed.fasta
+
+		mv "${params.sampleid}/assembly_renamed.fasta" "${params.sampleid}/${params.sampleid}.assembly.fasta"
 		"""
 }
