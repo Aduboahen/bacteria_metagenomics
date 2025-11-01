@@ -26,7 +26,7 @@ process clean_reads {
 process bin_qc{
 	tag 'mag_bin_qc'
 	conda '/home/james/miniconda3/envs/checkm2'
-	publishDir "${params.outdir}/qc/checkm", mode: 'copy'
+	publishDir "${params.outdir}/qc/", mode: 'copy'
 
 	input:
 		path bin_dir // path to MAG bins from vamb
@@ -36,7 +36,11 @@ process bin_qc{
 
 	script:
 		"""
-		checkm2 predict --input $bin_dir --output-directory "checkm" --database_path ${params.CHECKMDB} \
+		checkm2 predict --input $bin_dir --output-directory "checkm" \
+		--database_path ${params.CHECKMDB} \
 		--allmodels --threads ${params.threads} --force
+
+		# dRep dereplicate ${params.outdir}/drep -g $bin_dir -p ${params.threads}
+
 		"""
 }
