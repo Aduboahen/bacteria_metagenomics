@@ -40,9 +40,6 @@ process extract_human_reads {
 
 	script:
 		"""
-		#	extract_kraken_reads.py -k ${taxa_file} -s ${read} --taxid 9606 \
-		#	--exclude --output ${params.sampleid}_human_dep.fastq --fastq-output
-
 			minimap2 -ax map-ont ${params.human} ${read}  | samtools sort | samtools view -f 4 | samtools fastq - > ${params.sampleid}_human_dep.fastq
 		"""
 }
