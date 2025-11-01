@@ -3,7 +3,7 @@ qc
 scripts
 sub12
 meta_tools
-*nextflow*
+.nextflow*
 work
 results
 .nextflow*
