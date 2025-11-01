@@ -17,11 +17,11 @@ process assign_taxa {
 
 	script:
 		"""
-		kraken2 --db ${params.KRAKEN2_DB} --report ${params.sampleid}.k2report \
-		--classified-out ${params.sampleid}_classified.fastq \
-		--unclassified-out ${params.sampleid}_unclassified.fastq \
-		--output ${params.sampleid}.kraken2 --report-minimizer-data --use-names \
-		--threads ${params.threads} --memory-mapping ${read}
+			kraken2 --db ${params.KRAKEN2DB} --report ${params.sampleid}.k2report \
+			--classified-out ${params.sampleid}_classified.fastq \
+			--unclassified-out ${params.sampleid}_unclassified.fastq \
+			--output ${params.sampleid}.kraken2 --report-minimizer-data --use-names \
+			--threads ${params.threads} --memory-mapping ${read}
 		"""
 }
 
@@ -40,7 +40,9 @@ process extract_human_reads {
 
 	script:
 		"""
-			extract_kraken_reads.py -k ${taxa_file} -s ${read} --taxid 9606 \
-			--exclude --output ${params.sampleid}_human_dep.fastq --fastq-output
+		#	extract_kraken_reads.py -k ${taxa_file} -s ${read} --taxid 9606 \
+		#	--exclude --output ${params.sampleid}_human_dep.fastq --fastq-output
+
+			minimap2 -ax map-ont ${params.human} ${read}  | samtools sort | samtools view -f 4 | samtools fastq - > ${params.sampleid}_human_dep.fastq
 		"""
 }
