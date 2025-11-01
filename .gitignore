@@ -24,3 +24,5 @@ renv*
 *Rproj
 settings.json
 human
+*.ipynb
+drep
