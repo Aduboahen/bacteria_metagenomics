@@ -1,7 +1,3 @@
-#!/usr/bin/env nextflow
-
-nextflow.enable.dsl=2
-
 process concat_mags {
 	tag 'concatenate mags'
 	publishDir "${params.outdir}/mags", mode: 'copy', pattern: "*"
