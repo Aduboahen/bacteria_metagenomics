@@ -1,11 +1,12 @@
 process vamb_binning{
 	tag 'vamb binning'
-	publishDir "${params.outdir}/vamb", mode: 'copy'
+	publishDir "${params.outdir}", mode: 'copy'
 
 	input:
 		path mags_catalogue // 'Input MAGs file (fasta)'
 		path bamsdir // sorted bam file mapped to MAG catalogue
 		val bin_size
+		path mags
 	
 	output:
 		path "vamb/bins", emit: 'bins', type: 'dir' // directory containing vamb bins
@@ -13,8 +14,8 @@ process vamb_binning{
 	
 	script:
 		"""
-		source ~/.virtualenvs/vamb/bin/activate
+			source ~/.virtualenvs/vamb/bin/activate
 
-		vamb bin default --fasta ${mags_catalogue} --outdir "vamb" --bamdir ${bamsdir} -p ${params.threads} --minfasta ${bin_size}
+			vamb bin default --fasta ${mags_catalogue} --outdir "vamb" --bamdir ${bamsdir} --minfasta ${bin_size} -p ${params.threads}
 		"""
 }
