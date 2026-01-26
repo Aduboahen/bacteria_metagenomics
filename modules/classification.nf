@@ -1,5 +1,4 @@
 process classify {
-
 	tag 'classify_reads'
 	publishDir "${params.outdir}/classification", mode: 'copy', pattern: "*.kraken"
 
