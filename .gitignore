@@ -23,7 +23,10 @@ scratch
 renv*
 *Rproj
 settings.json
-human
+hosts
 *.ipynb
 drep
 report*
+*.pptx
+bad_files
+cleanup
