@@ -1,6 +1,5 @@
 process	assemble_mags {
 	tag 'assemble_mags'
-	conda '/home/james/miniconda3/envs/meta_assembler'
 	publishDir "${params.outdir}/mags", mode: 'copy', pattern: "*"
 
 	input:

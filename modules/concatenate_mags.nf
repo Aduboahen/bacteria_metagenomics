@@ -1,7 +1,6 @@
 process concat_mags {
 	tag 'concatenate mags'
 	publishDir "${params.outdir}/mags", mode: 'copy', pattern: "*"
-	conda '/home/james/miniconda3/envs/bacteria_meta'
 
 	input:
 		path mags_files // 'Path to saamebled MAGs files for all samples'
@@ -14,7 +13,7 @@ process concat_mags {
 		"""
 			source /home/james/.virtualenvs/vamb/bin/activate
 			
-			python /home/james/repos/github/vamb/src/concatenate.py mags_catalogue.fna $mags_files --nozip
+			python /home/james/repos/github/vamb/src/concatenate.py mags_catalogue.fna ${mags_files} --nozip
 
 			minimap2 -d mags_catalogue.mmi mags_catalogue.fna
 		"""

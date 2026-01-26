@@ -1,6 +1,5 @@
 process assign_taxa {
 	tag 'assign_taxa'
-	conda '/home/james/miniconda3/envs/bacteria_meta'
 	publishDir "${params.outdir}/kraken/abundance", mode: 'copy', pattern: "*kraken2"
 	publishDir "${params.outdir}/kraken/report", mode: 'copy', pattern: "*.k2report"
 	publishDir "${params.outdir}/kraken/classified", mode: 'copy', pattern: "*_classified.fastq"
@@ -26,20 +25,22 @@ process assign_taxa {
 }
 
 
-process extract_human_reads {
-	tag 'extract_human'
-	conda '/home/james/miniconda3/envs/bacteria_meta'
-	publishDir "${params.outdir}/kraken/human_dep_reads", mode: 'copy', pattern: "*.fastq"
+process remove_host_reads {
+	tag 'remove_host_reads'
+	
+	publishDir "${params.outdir}/kraken/host_depleted", mode: 'copy', pattern: "*.fastq.gz"
 
 	input:
 		path read // 'Input read file (fastq)'
-		path taxa_file // 'Taxonomic assignment file from Kraken2'
+		// path taxa_file // 'Taxonomic assignment file from Kraken2'
 
 	output:
-		path "${params.sampleid}_human_dep.fastq" // 'Reads without human reads'
+		path "${params.sampleid}_cleaned.fastq.gz" // 'Reads without host reads'
 
 	script:
 		"""
-			minimap2 -ax map-ont ${params.human} ${read}  | samtools sort | samtools view -f 4 | samtools fastq - > ${params.sampleid}_human_dep.fastq
+			minimap2 -ax map-ont ${params.hosts} ${read}  | samtools sort | samtools view -f 4 | samtools fastq - > ${params.sampleid}_cleaned.fastq
+
+			gzip ${params.sampleid}_cleaned.fastq
 		"""
 }

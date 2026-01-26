@@ -1,7 +1,6 @@
 process classify {
 
 	tag 'classify_reads'
-	conda '/home/james/miniconda3/envs/bacteria_meta'
 	publishDir "${params.outdir}/classification", mode: 'copy', pattern: "*.kraken"
 
 	input:

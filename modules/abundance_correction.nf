@@ -1,6 +1,5 @@
 process abundance_correction {
 	tag 'abundance_correction'
-	conda '/home/james/miniconda3/envs/bacteria_meta'
 	publishDir "${params.outdir}/abundance_correction/bracken/abundance", mode: 'copy', pattern: "*.bracken"
 	publishDir "${params.outdir}/abundance_correction/bracken/report", mode: 'copy', pattern: "*.breport"
 
@@ -19,7 +18,6 @@ process abundance_correction {
 
 process visualise_abundance{
 	tag 'visualise abundance'
-	conda '/home/james/miniconda3/envs/bacteria_meta'
 	publishDir "${params.outdir}/krona", mode: 'copy', pattern: "*"
 
 	input:
@@ -40,7 +38,7 @@ process visualise_abundance{
 
 process alpha_diversity{
 	tag "alpha diversity"
-	conda '/home/james/miniconda3/envs/bacteria_meta'
+	
 	publishDir "${params.outdir}/abundance_correction/diversity", mode: 'copy'
 
 	input:
@@ -58,7 +56,7 @@ process alpha_diversity{
 
 process beta_diversity{
 	tag "beta diversity"
-	conda '/home/james/miniconda3/envs/bacteria_meta'
+	
 	publishDir "${params.outdir}/abundance_correction/diversity", mode: 'copy'
 
 	input:

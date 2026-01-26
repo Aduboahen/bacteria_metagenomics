@@ -1,0 +1,35 @@
+nextflow_process {
+
+    name 'test_abundance_correction'
+    script '../abundance_correction.nf'
+    process 'abundance_correction'
+
+    tag "modules"
+    tag "modules_nfcore"
+    tag "abundance_correction"
+
+    test("should correct abundances") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id:'test', single_end:false ], // meta
+                    file(params.modules_testdata_base_path + 'genomics/sarscov2/genome/genome.fasta', checkIfExists: true)
+                ]
+                input[1] = [
+                    [ id:'test', single_end:false ], // meta
+                    file(params.modules_testdata_base_path + 'genomics/sarscov2/genome/genome.fasta', checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assertAll(
+                { assert process.success },
+                { assert snapshot(process.out).match("corrected_abundances") }
+            )
+        }
+    }
+}
