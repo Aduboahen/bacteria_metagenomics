@@ -3,9 +3,8 @@
 
 eza input/ | xargs -I % sh -c 'base=$(basename % .fastq.gz); ${PWD}/workflows/assemble_reads_generate_MAGS.nf --sampleid ${base} --inputdir ${PWD}/input'
 
-${PWD}/workflows/create_MAG_catalogue.nf --outdir ${PWD}/results -resume
+# ${PWD}/workflows/create_MAG_catalogue.nf --outdir ${PWD}/results
 
 eza input/ | xargs -I % sh -c 'base=$(basename % .fastq.gz); ${PWD}/workflows/mapping_mags.nf --sampleid ${base} --outdir ${PWD}/results'
 
-${PWD}/workflows/binning_classification.nf --outdir ${PWD}/results -resume
-
+${PWD}/workflows/binning_classification.nf --outdir ${PWD}/results
