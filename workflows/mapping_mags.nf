@@ -10,13 +10,13 @@ include { map_mags } from '../modules/mag_mapping'
 workflow {
 	log.info(
 		"""
-			MAP human depleted reads to MAG Catalogue
+			MAP host depleted reads to MAG Catalogue
 
 			========Sources===============
 			codeBase   						: ${projectDir}
 			sample     						: ${params.sampleid}
 			output path     			: ${params.outdir}
-			MAGs catalogue				: ${params.mag_catalogue}
+			MAGs catalogue				: ${params.mags_catalogue}
 
 			=======Author=======
 			James Osei-Mensa
@@ -24,5 +24,5 @@ workflow {
 		"""
 	)
 
-	map_mags(params.mags_catalogue, params.human_dep_reads)
+	map_mags(params.mags_catalogue, params.host_dep_reads)
 }
