@@ -30,3 +30,5 @@ report*
 *.pptx
 bad_files
 cleanup
+README.md
+*.yml
