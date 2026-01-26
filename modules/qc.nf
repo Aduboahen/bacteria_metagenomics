@@ -3,16 +3,15 @@ process clean_reads {
 	publishDir "${params.outdir}/qc/clean_reads", mode: 'copy'
 
 	input:
-		path read
+	path read
 
 	output:
-		path "${params.sampleid}_fastp.fastq.gz", emit: read
-		path "${params.sampleid}_fastp.html"
-    path "${params.sampleid}_fastp.json"
+	path "${params.sampleid}_fastp.fastq.gz", emit: read
+	path "${params.sampleid}_fastp.html"
+	path "${params.sampleid}_fastp.json"
 
-	
 	script:
-		"""
+	"""
 		fastplong -i ${read} -o ${params.sampleid}_fastp.fastq.gz \
 			--qualified_quality_phred ${params.quality} \
 			--length_required ${params.length} \
@@ -22,23 +21,23 @@ process clean_reads {
 		"""
 }
 
-process bin_qc{
+process bin_qc {
 	tag 'mag_bin_qc'
 	publishDir "${params.outdir}/qc/", mode: 'copy'
 
 	input:
-		path bin_dir // path to MAG bins from vamb
+	path bin_dir
 
 	output:
-		path "checkm"
+	path "checkm"
 
 	script:
-		"""
-		checkm2 predict --input $bin_dir --output-directory "checkm" \
+	"""
+		checkm2 predict --input ${bin_dir} --output-directory "checkm" \
 		--database_path ${params.CHECKMDB} \
 		--allmodels --threads ${params.threads} --force
 
-		# dRep dereplicate ${params.outdir}/drep -g $bin_dir -p ${params.threads}
+		# dRep dereplicate ${params.outdir}/drep -g ${bin_dir} -p ${params.threads}
 
 		"""
 }
