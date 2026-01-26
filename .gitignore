@@ -32,4 +32,5 @@ bad_files
 cleanup
 README.md
 *.yml
-GCF*
+human
+vamb
