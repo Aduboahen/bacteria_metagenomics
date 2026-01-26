@@ -1,6 +1,5 @@
 process clean_reads {
 	tag 'qc'
-	conda '/home/james/miniconda3/envs/bacteria_meta'
 	publishDir "${params.outdir}/qc/clean_reads", mode: 'copy'
 
 	input:
@@ -25,7 +24,6 @@ process clean_reads {
 
 process bin_qc{
 	tag 'mag_bin_qc'
-	conda '/home/james/miniconda3/envs/checkm2'
 	publishDir "${params.outdir}/qc/", mode: 'copy'
 
 	input:
