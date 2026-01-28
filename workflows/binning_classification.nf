@@ -37,11 +37,9 @@ workflow {
 		"""
 	)
 	
-	mag_files = channel.fromPath("${params.magsdir}").collect()
 	bracken_files = channel.fromPath("${params.bracken}").collect()
 	beta_diversity(bracken_files)
-	concat_mags(mag_files)
-	vamb_binning(concat_mags.out.mags_catalogue, "${params.bamsdir}", "${params.bin_size}", mag_files)
+	vamb_binning("${params.mags_catalogue}", "${params.bamsdir}", "${params.bin_size}")
 	bin_qc(vamb_binning.out.bins)
 	// classify(vamb_binning.out.bins)
 }
