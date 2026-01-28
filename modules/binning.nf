@@ -6,7 +6,6 @@ process vamb_binning{
 		path mags_catalogue // 'Input MAGs file (fasta)'
 		path bamsdir // sorted bam file mapped to MAG catalogue
 		val bin_size
-		path mags
 	
 	output:
 		path "vamb/bins", emit: 'bins', type: 'dir' // directory containing vamb bins
