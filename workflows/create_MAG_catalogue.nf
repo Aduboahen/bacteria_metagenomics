@@ -15,7 +15,7 @@ workflow {
 			========Sources===============
 			codeBase   			: ${projectDir}
 			outdir     : ${params.outdir}
-			MAGs path	: "${params.outdir}/mags/**/*.assembly.fasta"
+			MAGs path	: "${params.magsdir}"
 			threads    			: ${params.threads}
 
 			=======Author=======
@@ -26,5 +26,4 @@ workflow {
 
 	mag_files = channel.fromPath("${params.magsdir}").collect()
 	concat_mags(mag_files)
-
 }
