@@ -39,7 +39,7 @@ process remove_host_reads {
 
 	script:
 		"""
-			minimap2 -ax map-ont ${params.hosts} ${read}  | samtools sort | samtools view -f 4 | samtools fastq - > ${params.sampleid}_cleaned.fastq
+			minimap2 -ax map-ont -t ${params.threads} ${params.hosts} ${read}  | samtools sort | samtools view -f 4 | samtools fastq - > ${params.sampleid}_cleaned.fastq
 
 			gzip ${params.sampleid}_cleaned.fastq
 		"""
