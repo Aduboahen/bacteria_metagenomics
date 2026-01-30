@@ -16,7 +16,7 @@ process map_mags {
 
 	script:
 		"""
-		minimap2 -ax lr:hq ${mags_catalogue} ${read} | samtools sort - | samtools view -F 3844 -b -o ${params.sampleid}.bam -@ ${params.threads}
+		minimap2 -ax map-ont -t ${params.threads} ${mags_catalogue} ${read} | samtools sort - | samtools view -F 3844 -b -o ${params.sampleid}.bam -@ ${params.threads}
 
 		samtools index ${params.sampleid}.bam > ${params.sampleid}.bam.bai
 
