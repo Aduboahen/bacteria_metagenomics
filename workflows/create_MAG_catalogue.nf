@@ -6,18 +6,17 @@ params.outdir = "${workflow.outputDir}"
 
 // module
 include { concat_mags } from '../modules/concatenate_mags'
+include { abricate_contigs } from '../modules/resistance_finder'
 
 workflow {
 	log.info(
 		""""
 			Create MAG catalogue
-
 			========Sources===============
 			codeBase   			: ${projectDir}
 			outdir     : ${params.outdir}
-			MAGs path	: "${params.magsdir}"
+			MAGs path	: "${params.outdir}/mags/**/*.assembly.fasta"
 			threads    			: ${params.threads}
-
 			=======Author=======
 			James Osei-Mensa
 			oseimensa@kccr.de
@@ -26,4 +25,5 @@ workflow {
 
 	mag_files = channel.fromPath("${params.magsdir}").collect()
 	concat_mags(mag_files)
+	abricate_contigs(mag_files)
 }
