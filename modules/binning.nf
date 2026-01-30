@@ -15,6 +15,7 @@ process vamb_binning{
 		"""
 			source ~/.virtualenvs/vamb/bin/activate
 
-			vamb bin default --fasta ${mags_catalogue} --outdir "vamb" --bamdir ${bamsdir} --minfasta ${bin_size} -p ${params.threads}
+			vamb bin default --fasta ${mags_catalogue} --outdir "vamb" \
+			--bamdir ${bamsdir} --minfasta ${bin_size} -p ${params.threads}
 		"""
 }
