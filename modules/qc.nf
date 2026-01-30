@@ -4,6 +4,8 @@ process clean_reads {
 
 	input:
 	path read
+	val phred_qual
+	val read_len
 
 	output:
 	path "${params.sampleid}_fastp.fastq.gz", emit: read
@@ -13,8 +15,8 @@ process clean_reads {
 	script:
 	"""
 		fastplong -i ${read} -o ${params.sampleid}_fastp.fastq.gz \
-			--qualified_quality_phred ${params.quality} \
-			--length_required ${params.length} \
+			--qualified_quality_phred ${phred_qual} \
+			--length_required ${read_len} \
 			--html ${params.sampleid}_fastp.html \
 			--json ${params.sampleid}_fastp.json \
 			--thread ${params.threads}
