@@ -6,7 +6,7 @@ params.outdir   = "${workflow.outputDir}"
 
 // modules
 include { map_mags } from '../modules/mag_mapping'
-
+include {concat_mags} from '../modules/concatenate_mags'
 workflow {
 	log.info(
 		"""
@@ -23,6 +23,5 @@ workflow {
 			oseimensa@kccr.de
 		"""
 	)
-
-	map_mags(params.mags_catalogue, params.host_dep_reads)
+	map_mags("${params.mags_catalogue}", "${params.host_dep_reads}")
 }
