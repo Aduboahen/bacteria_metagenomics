@@ -1,7 +1,7 @@
 process abundance_correction {
 	tag 'abundance_correction'
-	publishDir "${outputDir}/abundance_correction/bracken/abundance", mode: 'copy', pattern: "*.bracken"
-	publishDir "${outputDir}/abundance_correction/bracken/report", mode: 'copy', pattern: "*.breport"
+	publishDir "${params.outdir}/abundance_correction/bracken/abundance", mode: 'copy', pattern: "*.bracken"
+	publishDir "${params.outdir}/abundance_correction/bracken/report", mode: 'copy', pattern: "*.breport"
 
 	input:
 		path kraken_report // 'Taxonomic assignment reportt from Kraken2'
@@ -18,7 +18,7 @@ process abundance_correction {
 
 process visualise_abundance{
 	tag 'visualise abundance'
-	publishDir "${outputDir}/krona", mode: 'copy', pattern: "*"
+	publishDir "${params.outdir}/krona", mode: 'copy', pattern: "*"
 
 	input:
 		path bracken_report // 'Path to abundance file from bracken'4
@@ -39,7 +39,7 @@ process visualise_abundance{
 process alpha_diversity{
 	tag "alpha diversity"
 	
-	publishDir "${outputDir}/abundance_correction/diversity", mode: 'copy'
+	publishDir "${params.outdir}/abundance_correction/diversity", mode: 'copy'
 
 	input:
 		path bracken_file
@@ -57,7 +57,7 @@ process alpha_diversity{
 process beta_diversity{
 	tag "beta diversity"
 	
-	publishDir "${outputDir}/abundance_correction/diversity", mode: 'copy'
+	publishDir "${params.outdir}/abundance_correction/diversity", mode: 'copy'
 
 	input:
 		path bracken_files

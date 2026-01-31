@@ -19,7 +19,7 @@ workflow {
 			codeBase  	: $projectDir
 			sample    	: $params.sampleid
 			inputdir    : $params.inputdir
-			outdir    	: $outputDir
+			outdir    	: $params.outdir
 			KRAKEN2 DB 	: $params.KRAKEN2DB
 
 			=======Filters========

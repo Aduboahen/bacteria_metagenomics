@@ -1,6 +1,6 @@
 process classify {
 	tag 'classify_reads'
-	publishDir "${outputDir}/classification", mode: 'copy'
+	publishDir "${params.outdir}/classification", mode: 'copy'
 
 	input:
 		path bins // MAG bins from vamb

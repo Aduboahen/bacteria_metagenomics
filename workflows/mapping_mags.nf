@@ -2,7 +2,7 @@
 
 nextflow.enable.dsl = 2
 
-outputDir   = "${workflow.outputDir}"
+params.outdir   = "${workflow.outputDir}"
 
 // modules
 include { map_mags } from '../modules/mag_mapping'
@@ -14,7 +14,7 @@ workflow {
 			========Sources===============
 			codeBase   		 : ${projectDir}
 			sample     		 : ${params.sampleid}
-			output path    : ${outputDir}
+			output path    : ${params.outdir}
 			MAGs catalogue : ${params.mags_catalogue}
 			=======Author=======
 			James Osei-Mensa

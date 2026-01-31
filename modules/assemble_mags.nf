@@ -1,6 +1,6 @@
 process	assemble_mags {
 	tag 'assemble_mags'
-	publishDir "${outputDir}/mags", mode: 'copy', pattern: "*"
+	publishDir "${params.outdir}/mags", mode: 'copy', pattern: "*"
 
 	input:
 		path read // 'Input read file (fastq)'

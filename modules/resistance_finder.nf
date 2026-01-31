@@ -2,7 +2,7 @@ process abricate_contigs {
     // run abricate on raw assembled contigs to 
     // determine resistance genes present in metagenome
     tag 'abricate_on_contigs'
-    publishDir "${outputDir}/resistance", mode: 'copy',  pattern: '*.csv'
+    publishDir "${params.outdir}/resistance", mode: 'copy',  pattern: '*.csv'
 
     input:
         path mag_files
@@ -18,7 +18,7 @@ process abricate_bins {
     // run abricate on binned assemblies to 
     // determine resistance genes present in metagenome
     tag 'abricate_on_mag_bins'
-    publishDir "${outputDir}/resistance", mode: 'copy', pattern: '*.csv'
+    publishDir "${params.outdir}/resistance", mode: 'copy', pattern: '*.csv'
 
     input:
         path mag_bins
