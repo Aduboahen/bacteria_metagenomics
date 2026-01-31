@@ -1,6 +1,6 @@
 process vamb_binning{
 	tag 'vamb binning'
-	publishDir "${params.outdir}", mode: 'copy'
+	publishDir "${outputDir}", mode: 'copy'
 
 	input:
 		path mags_catalogue // 'Input MAGs file (fasta)'

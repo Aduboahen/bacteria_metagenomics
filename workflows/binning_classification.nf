@@ -16,7 +16,7 @@ workflow {
 			Binning and Classifying MAGs
 			========Sources==========
 			codeBase  : ${projectDir}
-			outdir    : ${params.outdir}
+			outdir    : ${outputDir}
 			bamsdir : ${params.bamsdir}
 			mags_catalogue : ${params.mags_catalogue}
 			MAGs dir : ${params.magsdir}

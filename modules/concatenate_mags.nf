@@ -1,6 +1,6 @@
 process concat_mags {
 	tag 'concatenate mags'
-	publishDir "${params.outdir}/mags", mode: 'copy', pattern: "*"
+	publishDir "${outputDir}/mags", mode: 'copy', pattern: "*"
 
 	input:
 		path mags_files // 'Path to saamebled MAGs files for all samples'

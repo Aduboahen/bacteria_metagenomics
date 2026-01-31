@@ -1,8 +1,8 @@
 process map_mags {
 	tag 'map_mag'
-	publishDir "${params.outdir}/bams", mode: 'copy', pattern: "*.bam"
-	publishDir "${params.outdir}/bams", mode: 'copy', pattern: "*.stats"
-	publishDir "${params.outdir}/bams", mode: 'copy', pattern: "*.bai"
+	publishDir "${outputDir}/bams", mode: 'copy', pattern: "*.bam"
+	publishDir "${outputDir}/bams", mode: 'copy', pattern: "*.stats"
+	publishDir "${outputDir}/bams", mode: 'copy', pattern: "*.bai"
 
 	input:
 		path mags_catalogue // 'Input MAGs file (fna)'

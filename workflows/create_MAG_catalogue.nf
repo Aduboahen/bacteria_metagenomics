@@ -2,7 +2,7 @@
 
 nextflow.enable.dsl = 2
 
-params.outdir = "${workflow.outputDir}"
+outputDir = "${workflow.outputDir}"
 
 // module
 include { concat_mags } from '../modules/concatenate_mags'
@@ -14,8 +14,8 @@ workflow {
 			Create MAG catalogue
 			========Sources===============
 			codeBase   			: ${projectDir}
-			outdir     : ${params.outdir}
-			MAGs path	: "${params.outdir}/mags/**/*.assembly.fasta"
+			outdir     : ${outputDir}
+			MAGs path	: "${outputDir}/mags/**/*.assembly.fasta"
 			threads    			: ${params.threads}
 			=======Author=======
 			James Osei-Mensa

@@ -1,9 +1,9 @@
 process assign_taxa {
 	tag 'assign_taxa'
-	publishDir "${params.outdir}/kraken/abundance", mode: 'copy', pattern: "*kraken2"
-	publishDir "${params.outdir}/kraken/report", mode: 'copy', pattern: "*.k2report"
-	publishDir "${params.outdir}/kraken/classified", mode: 'copy', pattern: "*_classified.fastq"
-	publishDir "${params.outdir}/kraken/unclassified", mode: 'copy', pattern: "*_unclassified.fastq"
+	publishDir "${outputDir}/kraken/abundance", mode: 'copy', pattern: "*kraken2"
+	publishDir "${outputDir}/kraken/report", mode: 'copy', pattern: "*.k2report"
+	publishDir "${outputDir}/kraken/classified", mode: 'copy', pattern: "*_classified.fastq"
+	publishDir "${outputDir}/kraken/unclassified", mode: 'copy', pattern: "*_unclassified.fastq"
 
 	input:
 		path read // 'Input read file (fastq)'
@@ -28,7 +28,7 @@ process assign_taxa {
 process remove_host_reads {
 	tag 'remove_host_reads'
 	
-	publishDir "${params.outdir}/kraken/host_depleted", mode: 'copy', pattern: "*.fastq.gz"
+	publishDir "${outputDir}/kraken/host_depleted", mode: 'copy', pattern: "*.fastq.gz"
 
 	input:
 		path read // 'Input read file (fastq)'

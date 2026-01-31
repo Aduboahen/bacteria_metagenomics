@@ -1,6 +1,6 @@
 process clean_reads {
 	tag 'qc'
-	publishDir "${params.outdir}/qc/clean_reads", mode: 'copy'
+	publishDir "${outputDir}/qc/clean_reads", mode: 'copy'
 
 	input:
 	path read
@@ -25,7 +25,7 @@ process clean_reads {
 
 process bin_qc {
 	tag 'mag_bin_qc'
-	publishDir "${params.outdir}/qc/", mode: 'copy'
+	publishDir "${outputDir}/qc/", mode: 'copy'
 
 	input:
 	path bin_dir
@@ -39,7 +39,7 @@ process bin_qc {
 		--database_path ${params.CHECKMDB} \
 		--allmodels --threads ${params.threads} --force
 
-		# dRep dereplicate ${params.outdir}/drep -g ${bin_dir} -p ${params.threads}
+		# dRep dereplicate ${outputDir}/drep -g ${bin_dir} -p ${params.threads}
 
 		"""
 }
