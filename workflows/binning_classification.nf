@@ -2,9 +2,6 @@
 
 nextflow.enable.dsl = 2
 
-// params
-params.outdir = "${workflow.outputDir}"
-
 // moduleS
 include { vamb_binning } from '../modules/binning'
 include { bin_qc } from '../modules/qc'

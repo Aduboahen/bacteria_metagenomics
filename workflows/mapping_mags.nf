@@ -11,13 +11,11 @@ workflow {
 	log.info(
 		"""
 			MAP host depleted reads to MAG Catalogue
-
 			========Sources===============
-			codeBase   						: ${projectDir}
-			sample     						: ${params.sampleid}
-			output path     			: ${params.outdir}
-			MAGs catalogue				: ${params.mags_catalogue}
-
+			codeBase   		 : ${projectDir}
+			sample     		 : ${params.sampleid}
+			output path    : ${params.outdir}
+			MAGs catalogue : ${params.mags_catalogue}
 			=======Author=======
 			James Osei-Mensa
 			oseimensa@kccr.de

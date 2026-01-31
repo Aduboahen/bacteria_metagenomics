@@ -11,9 +11,9 @@ process concat_mags {
 
 	script:
 		"""
-			source ./envs/vamb/bin/activate
+			source ~/.virtualenvs/vamb/bin/activate
 			
-			python ./scripts/vamb/src/concatenate.py mags_catalogue.fna ${mags_files}
+			python ~/repos/github/metagenome/scripts/vamb/src/concatenate.py mags_catalogue.fna ${mags_files}
 
 			minimap2 -d mags_catalogue.mmi mags_catalogue.fna
 		"""

@@ -2,8 +2,6 @@
 
 nextflow.enable.dsl=2
 
-params.outdir   = "${workflow.outputDir}"
-
 // module
 include {clean_reads} from '../modules/qc'
 include {assign_taxa; remove_host_reads} from '../modules/assign_taxa'
@@ -20,7 +18,7 @@ workflow {
 			========Sources===============
 			codeBase  	: $projectDir
 			sample    	: $params.sampleid
-			inputdir     	: $params.inputdir
+			inputdir    : $params.inputdir
 			outdir    	: $params.outdir
 			KRAKEN2 DB 	: $params.KRAKEN2DB
 
