@@ -1,5 +1,5 @@
 process concat_mags {
-	tag ${params.sampleid}
+	tag "${params.sampleid}"
 	publishDir "${params.outdir}/mags", mode: 'copy', pattern: "*"
 
 	input:

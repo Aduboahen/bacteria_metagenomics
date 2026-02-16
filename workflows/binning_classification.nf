@@ -31,7 +31,7 @@ workflow {
 	bracken_files = channel.fromPath("${params.bracken}").collect()
 	beta_diversity(bracken_files)
 	vamb_binning("${params.mags_catalogue}", "${params.bamsdir}", "${params.bin_size}")
-	bin_qc(vamb_binning.out.bins)
+	bin_qc(vamb_binning.out.bins,  "${params.CHECKMDB}")
 	mag_bins = channel.fromPath("${params.bins}").collect()
 	abricate_bins(mag_bins)
 	classify(vamb_binning.out.bins)

@@ -33,8 +33,8 @@ workflow {
 
 		fastq = channel.fromPath("${params.inputdir}/${params.sampleid}.fastq.gz").ifEmpty{"no such file"}
 		clean_reads(fastq, "${params.base_quality}", "${params.read_length}")
-		remove_host_reads(clean_reads.out.read)
-		assign_taxa(remove_host_reads.out)
+		remove_host_reads(clean_reads.out.read, "${params.hosts}")
+		assign_taxa(remove_host_reads.out, "${params.KRAKEN2DB}")
 		abundance_correction(assign_taxa.out.kraken_report)
 		visualise_abundance(abundance_correction.out.bracken_report)
 		alpha_diversity(abundance_correction.out.bracken_file)

@@ -1,5 +1,5 @@
 process classify {
-	tag ${params.sampleid}
+	tag "${params.sampleid}"
 	publishDir "${params.outdir}/classification", mode: 'copy'
 
 	input:

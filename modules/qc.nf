@@ -1,5 +1,5 @@
 process clean_reads {
-	tag ${params.sampleid}
+	tag "${params.sampleid}"
 	publishDir "${params.outdir}/qc/clean_reads", mode: 'copy'
 
 	input:
@@ -24,11 +24,12 @@ process clean_reads {
 }
 
 process bin_qc {
-	tag ${params.sampleid}
+	tag "${params.sampleid}"
 	publishDir "${params.outdir}/qc/", mode: 'copy'
 
 	input:
 	path bin_dir
+	path CHECKMDB
 
 	output:
 	path "checkm"
@@ -36,7 +37,7 @@ process bin_qc {
 	script:
 	"""
 		checkm2 predict --input ${bin_dir} --output-directory "checkm" \
-		--database_path ${params.CHECKMDB} \
+		--database_path ${CHECKMDB} \
 		--allmodels --threads ${params.threads} --force
 
 		# dRep dereplicate ${params.outdir}/drep -g ${bin_dir} -p ${params.threads}

@@ -1,5 +1,5 @@
 process abundance_correction {
-	tag ${params.sampleid}
+	tag "${params.sampleid}"
 	publishDir "${params.outdir}/abundance_correction/bracken/abundance", mode: 'copy', pattern: "*.bracken"
 	publishDir "${params.outdir}/abundance_correction/bracken/report", mode: 'copy', pattern: "*.breport"
 
@@ -17,7 +17,7 @@ process abundance_correction {
 }
 
 process visualise_abundance{
-	tag ${params.sampleid}
+	tag "${params.sampleid}"
 	publishDir "${params.outdir}/krona", mode: 'copy', pattern: "*"
 
 	input:
@@ -37,7 +37,7 @@ process visualise_abundance{
 }
 
 process alpha_diversity{
-	tag ${params.sampleid}
+	tag "${params.sampleid}"
 	
 	publishDir "${params.outdir}/abundance_correction/diversity", mode: 'copy'
 
@@ -55,7 +55,7 @@ process alpha_diversity{
 
 
 process beta_diversity{
-	tag ${params.sampleid}
+	tag "${params.sampleid}"
 	
 	publishDir "${params.outdir}/abundance_correction/diversity", mode: 'copy'
 

@@ -1,5 +1,5 @@
 process map_mags {
-	tag ${params.sampleid}
+	tag "${params.sampleid}"
 	publishDir "${params.outdir}/bams", mode: 'copy', pattern: "*.bam"
 	publishDir "${params.outdir}/bams", mode: 'copy', pattern: "*.stats"
 	publishDir "${params.outdir}/bams", mode: 'copy', pattern: "*.bai"

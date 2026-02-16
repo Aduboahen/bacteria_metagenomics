@@ -1,5 +1,5 @@
 process vamb_binning{
-	tag ${params.sampleid}
+	tag "${params.sampleid}"
 	publishDir "${params.outdir}", mode: 'copy'
 
 	input:

@@ -1,5 +1,5 @@
 process assign_taxa {
-	tag ${params.sampleid}
+	tag "${params.sampleid}"
 	publishDir "${params.outdir}/kraken/abundance", mode: 'copy', pattern: "*kraken2"
 	publishDir "${params.outdir}/kraken/report", mode: 'copy', pattern: "*.k2report"
 	publishDir "${params.outdir}/kraken/classified", mode: 'copy', pattern: "*_classified.fastq"
@@ -7,6 +7,8 @@ process assign_taxa {
 
 	input:
 		path read // 'Input read file (fastq)'
+		path KRAKEN2DB // 'Kraken2 database'
+
 
 	output:
 		path "${params.sampleid}.kraken2", emit: taxa_file  // 'Assigned taxa results'
@@ -16,7 +18,7 @@ process assign_taxa {
 
 	script:
 		"""
-			kraken2 --db ${params.KRAKEN2DB} --report ${params.sampleid}.k2report \
+			kraken2 --db ${KRAKEN2DB} --report ${params.sampleid}.k2report \
 			--classified-out ${params.sampleid}_classified.fastq \
 			--unclassified-out ${params.sampleid}_unclassified.fastq \
 			--output ${params.sampleid}.kraken2 --report-minimizer-data --use-names \
@@ -26,20 +28,20 @@ process assign_taxa {
 
 
 process remove_host_reads {
-	tag ${params.sampleid}
+	tag "${params.sampleid}"
 	
 	publishDir "${params.outdir}/kraken/host_depleted", mode: 'copy', pattern: "*.fastq.gz"
 
 	input:
 		path read // 'Input read file (fastq)'
-		// path taxa_file // 'Taxonomic assignment file from Kraken2'
+		path hosts // 'Host reference genome (fasta)'
 
 	output:
 		path "${params.sampleid}_cleaned.fastq.gz" // 'Reads without host reads'
 
 	script:
 		"""
-			minimap2 -ax map-ont -t ${params.threads} ${params.hosts} ${read}  | samtools sort | samtools view -f 4 | samtools fastq - > ${params.sampleid}_cleaned.fastq
+			minimap2 -ax map-ont -t ${params.threads} ${hosts} ${read}  | samtools sort | samtools view -f 4 | samtools fastq - > ${params.sampleid}_cleaned.fastq
 
 			gzip ${params.sampleid}_cleaned.fastq
 		"""

@@ -1,7 +1,7 @@
 process abricate_contigs {
     // run abricate on raw assembled contigs to 
     // determine resistance genes present in metagenome
-    tag ${params.sampleid}
+    tag "${params.sampleid}"
     publishDir "${params.outdir}/resistance", mode: 'copy',  pattern: '*.csv'
 
     input:
@@ -17,7 +17,7 @@ process abricate_contigs {
 process abricate_bins {
     // run abricate on binned assemblies to 
     // determine resistance genes present in metagenome
-    tag ${params.sampleid}
+    tag "${params.sampleid}"
     publishDir "${params.outdir}/resistance", mode: 'copy', pattern: '*.csv'
 
     input:
