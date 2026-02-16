@@ -1,5 +1,5 @@
 process clean_reads {
-	tag 'qc'
+	tag ${params.sampleid}
 	publishDir "${params.outdir}/qc/clean_reads", mode: 'copy'
 
 	input:
@@ -24,7 +24,7 @@ process clean_reads {
 }
 
 process bin_qc {
-	tag 'mag_bin_qc'
+	tag ${params.sampleid}
 	publishDir "${params.outdir}/qc/", mode: 'copy'
 
 	input:

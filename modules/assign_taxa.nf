@@ -1,5 +1,5 @@
 process assign_taxa {
-	tag 'assign_taxa'
+	tag ${params.sampleid}
 	publishDir "${params.outdir}/kraken/abundance", mode: 'copy', pattern: "*kraken2"
 	publishDir "${params.outdir}/kraken/report", mode: 'copy', pattern: "*.k2report"
 	publishDir "${params.outdir}/kraken/classified", mode: 'copy', pattern: "*_classified.fastq"
@@ -26,7 +26,7 @@ process assign_taxa {
 
 
 process remove_host_reads {
-	tag 'remove_host_reads'
+	tag ${params.sampleid}
 	
 	publishDir "${params.outdir}/kraken/host_depleted", mode: 'copy', pattern: "*.fastq.gz"
 

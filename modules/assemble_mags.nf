@@ -1,5 +1,5 @@
 process	assemble_mags {
-	tag 'assemble_mags'
+	tag ${params.sampleid}
 	publishDir "${params.outdir}/mags", mode: 'copy', pattern: "*"
 
 	input:
