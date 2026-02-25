@@ -9,6 +9,6 @@ process FASTCAT {
 
 	script:
 	"""
-		fastcat fastq_dir | gzip > "${sample_id}_fastq.gz"
+		fastcat $fastq_dir | gzip > "${sample_id}_fastq.gz"
 	"""
 }
