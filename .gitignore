@@ -31,7 +31,6 @@ report*
 bad_files
 cleanup
 README.md
-*.yml
 human
 vamb
 misc
