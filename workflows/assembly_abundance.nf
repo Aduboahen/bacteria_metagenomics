@@ -1,42 +1,35 @@
 #!/usr/bin/env nextflow
 
-nextflow.enable.dsl=2
+nextflow.enable.dsl = 2
 
 // module
-include {clean_reads} from '../modules/qc'
-include {assign_taxa; remove_host_reads} from '../modules/assign_taxa'
-include {assemble_mags} from '../modules/assemble_mags'
-include {abundance_correction} from '../modules/abundance_correction'
-include {visualise_abundance} from '../modules/abundance_correction'
-include {alpha_diversity} from '../modules/abundance_correction'
-include {map_mags} from '../modules/mag_mapping.nf'
+include { FASTPLONG_CLEAN_READS } from '../modules/fastp'
+include { KRAKEN2_ASSIGN_TAXA } from '../modules/kraken'
+include { MINIMAP2_REMOVE_HOST_READS } from '../modules/minimap2'
+include { FLYE_ASSEMBLE } from '../modules/flye'
+include { BRACKEN_ABUNDANCE } from '../modules/bracken'
+include { KRONA_VISUALISE } from '../modules/krona'
+include { ALPHA_DIVERSITY } from '../modules/diversity'
 
-workflow {
-		log.info"""
-			Assemble reads and generate MAGS
+workflow taxa_assign_assembly {
+	take:
+	fastq_ch
+	base_quality
+	read_length
+	hosts
+	KRAKEN2DB
 
-			========Sources===============
-			codeBase  	: $projectDir
-			sample    	: $params.sampleid
-			inputdir    : $params.inputdir
-			outdir    	: $params.outdir
-			KRAKEN2 DB 	: $params.KRAKEN2DB
+	main:
+	FASTPLONG_CLEAN_READS(fastq_ch, base_quality, read_length)
+	MINIMAP2_REMOVE_HOST_READS(FASTPLONG_CLEAN_READS.out.read, hosts)
+	KRAKEN2_ASSIGN_TAXA(MINIMAP2_REMOVE_HOST_READS.out, KRAKEN2DB)
+	BRACKEN_ABUNDANCE(KRAKEN2_ASSIGN_TAXA.out.kraken_report, KRAKEN2DB)
+	KRONA_VISUALISE(BRACKEN_ABUNDANCE.out.bracken_report)
+	ALPHA_DIVERSITY(BRACKEN_ABUNDANCE.out.bracken_file)
+	FLYE_ASSEMBLE(MINIMAP2_REMOVE_HOST_READS.out)
 
-			=======Filters========
-			required length   : $params.length
-			quality threshold : $params.quality
-
-			=======Author=======
-			James Osei-Mensa
-			oseimensa@kccr.de
-		"""
-
-		fastq = channel.fromPath("${params.inputdir}/${params.sampleid}.fastq.gz").ifEmpty{"no such file"}
-		clean_reads(fastq, "${params.base_quality}", "${params.read_length}")
-		remove_host_reads(clean_reads.out.read, "${params.hosts}")
-		assign_taxa(remove_host_reads.out, "${params.KRAKEN2DB}")
-		abundance_correction(assign_taxa.out.kraken_report)
-		visualise_abundance(abundance_correction.out.bracken_report)
-		alpha_diversity(abundance_correction.out.bracken_file)
-		assemble_mags(remove_host_reads.out)
+	emit:
+	mags_file = FLYE_ASSEMBLE.out.mag_file
+	host_dep_reads = MINIMAP2_REMOVE_HOST_READS.out
+	bracken_file = BRACKEN_ABUNDANCE.out.bracken_file
 }

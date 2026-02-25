@@ -1,48 +1,30 @@
-process assign_taxa {
-	tag "${params.sampleid}"
+process KRAKEN2_ASSIGN_TAXA {
+	label "assign taxa"
 	publishDir "${params.outdir}/kraken/abundance", mode: 'copy', pattern: "*kraken2"
 	publishDir "${params.outdir}/kraken/report", mode: 'copy', pattern: "*.k2report"
 	publishDir "${params.outdir}/kraken/classified", mode: 'copy', pattern: "*_classified.fastq"
 	publishDir "${params.outdir}/kraken/unclassified", mode: 'copy', pattern: "*_unclassified.fastq"
 
 	input:
-		path read // 'Input read file (fastq)'
-		path KRAKEN2DB // 'Kraken2 database'
-
+	tuple val(sample_id), path(read)
+	// 'Input read file (fastq)'
+	path KRAKEN2DB
 
 	output:
-		path "${params.sampleid}.kraken2", emit: taxa_file  // 'Assigned taxa results'
-		path "${params.sampleid}.k2report", emit: kraken_report // 'Kraken2 report file'
-		path "${params.sampleid}_classified.fastq" // 'Unclassified reads'
-		path "${params.sampleid}_unclassified.fastq" // 'Unclassified reads'
+	path "${sample_id}.kraken2", emit: taxa_file
+	// 'Assigned taxa results'
+	tuple val(sample_id), path("${sample_id}.k2report"), emit: kraken_report
+	// 'Kraken2 report file'
+	path "${sample_id}_classified.fastq"
+	// 'Unclassified reads'
+	path "${sample_id}_unclassified.fastq"
 
 	script:
-		"""
-			kraken2 --db ${KRAKEN2DB} --report ${params.sampleid}.k2report \
-			--classified-out ${params.sampleid}_classified.fastq \
-			--unclassified-out ${params.sampleid}_unclassified.fastq \
-			--output ${params.sampleid}.kraken2 --report-minimizer-data --use-names \
+	"""
+			kraken2 --db ${KRAKEN2DB} --report ${sample_id}.k2report \
+			--classified-out ${sample_id}_classified.fastq \
+			--unclassified-out ${sample_id}_unclassified.fastq \
+			--output ${sample_id}.kraken2 --report-minimizer-data --use-names \
 			--threads ${params.threads} --memory-mapping ${read}
-		"""
-}
-
-
-process remove_host_reads {
-	tag "${params.sampleid}"
-	
-	publishDir "${params.outdir}/kraken/host_depleted", mode: 'copy', pattern: "*.fastq.gz"
-
-	input:
-		path read // 'Input read file (fastq)'
-		path hosts // 'Host reference genome (fasta)'
-
-	output:
-		path "${params.sampleid}_cleaned.fastq.gz" // 'Reads without host reads'
-
-	script:
-		"""
-			minimap2 -ax map-ont -t ${params.threads} ${hosts} ${read}  | samtools sort | samtools view -f 4 | samtools fastq - > ${params.sampleid}_cleaned.fastq
-
-			gzip ${params.sampleid}_cleaned.fastq
 		"""
 }

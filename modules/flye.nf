@@ -1,19 +1,19 @@
-process	assemble_mags {
-	tag "${params.sampleid}"
+process FLYE_ASSEMBLE {
+	label "assembly"
 	publishDir "${params.outdir}/mags", mode: 'copy', pattern: "*"
 
 	input:
-		path read // 'Input read file (fastq)'
+	tuple val(sample_id), path(read)
 
 	output:
-		path "${params.sampleid}", emit: mags_file // 'Assembled MAGs in FASTA format'
+	path("${sample_id}/${sample_id}.assembly.fasta"), emit: mag_file
 
 	script:
-		"""
-		flye --nano-hq ${read} -o ${params.sampleid} --meta --threads ${params.threads}
+	"""
+		flye --nano-hq ${read} -o ${sample_id} --meta --threads ${params.threads}
 
-		awk -v s="${params.sampleid}_" '/^>/ {\$0=">" s substr(\$0,2)} 1 ' ${params.sampleid}/assembly.fasta > ${params.sampleid}/assembly_renamed.fasta
+		awk -v s="${sample_id}_" '/^>/ {\$0=">" s substr(\$0,2)} 1 ' ${sample_id}/assembly.fasta > ${sample_id}/assembly_renamed.fasta
 
-		mv "${params.sampleid}/assembly_renamed.fasta" "${params.sampleid}/${params.sampleid}.assembly.fasta"
+		mv "${sample_id}/assembly_renamed.fasta" "${sample_id}/${sample_id}.assembly.fasta"
 		"""
 }

@@ -2,28 +2,18 @@
 
 nextflow.enable.dsl = 2
 
-params.outdir = "${workflow.outputDir}"
-
 // module
-include { concat_mags } from '../modules/concatenate_mags'
-include { abricate_contigs } from '../modules/resistance_finder'
+include { VAMB_CONCAT } from '../modules/vamb'
+include { ABRICATE_CONTIGS } from '../modules/abricate'
 
-workflow {
-	log.info(
-		""""
-			Create MAG catalogue
-			========Sources===============
-			codeBase   			: ${projectDir}
-			outdir     : ${params.outdir}
-			MAGs path	: "${params.outdir}/mags/**/*.assembly.fasta"
-			threads    			: ${params.threads}
-			=======Author=======
-			James Osei-Mensa
-			oseimensa@kccr.de
-		"""
-	)
+workflow create_mag_catalogue {
+	take:
+	raw_mags
 
-	mag_files = channel.fromPath("${params.magsdir}").collect()
-	concat_mags(mag_files)
-	abricate_contigs(mag_files)
+	main:
+	VAMB_CONCAT(raw_mags)
+	ABRICATE_CONTIGS(raw_mags)
+
+	emit:
+	mags_catalogue = VAMB_CONCAT.out.mags_catalogue
 }

@@ -1,9 +1,12 @@
-process classify {
-	tag "${params.sampleid}"
+process GTDB_CLASSIFY {
+	label "gtdb classification"
 	publishDir "${params.outdir}/classification", mode: 'copy'
 
 	input:
 		path bins // MAG bins from vamb
+	
+	output:
+		path "gtdb"
 
 	script:
 		"""
