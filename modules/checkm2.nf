@@ -1,6 +1,6 @@
 process CHECKM2_BIN_QC {
 	label "checkm2 bin qc"
-	publishDir "${params.outdir}/qc/", mode: 'copy'
+	publishDir "${params.outdir}/QC/", mode: 'copy'
 
 	input:
 	path bin_dir
