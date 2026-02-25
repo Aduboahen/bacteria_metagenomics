@@ -1,7 +1,7 @@
 input
 scripts
 .nextflow*
-results*
+*results*
 databases
 scratch
 hosts
@@ -9,5 +9,4 @@ hosts
 cleanup
 misc
 embl*
-*results*
 envs
