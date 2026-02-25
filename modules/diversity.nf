@@ -1,6 +1,6 @@
 process ALPHA_DIVERSITY {
 	label "alpha diversity"
-	publishDir "${params.outdir}/bracken/diversity", mode: 'copy'
+	publishDir "${params.outdir}/diversity", mode: 'copy'
 
 	input:
 	tuple val(sample_id), path(bracken_file)
