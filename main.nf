@@ -20,14 +20,14 @@ workflow {
 		"""
 	)
 
-	fastq = channel.fromPath("${params.inputdir}/*.fastq.gz", checkIfExists: true)
-		.map { file ->
-			def sample_id = file.simpleName
-			return [sample_id, file]
+	fastq_ch = channel.fromPath("${params.inputdir}/*", type: 'dir', checkIfExists: true)
+		.map { folder ->
+			def sample_id = folder.name
+			return [sample_id, folder]
 		}
 
 	taxa_assign_assembly(
-		fastq,
+		fastq_ch,
 		params.base_quality,
 		params.read_length,
 		params.hosts,
