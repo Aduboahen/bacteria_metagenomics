@@ -1,5 +1,5 @@
 process KRAKEN2_ASSIGN_TAXA {
-	label "assign taxa"
+	label "assign_taxa"
 	publishDir "${params.outdir}/kraken/abundance", mode: 'copy', pattern: "*kraken2"
 	publishDir "${params.outdir}/kraken/report", mode: 'copy', pattern: "*.k2report"
 	publishDir "${params.outdir}/kraken/classified", mode: 'copy', pattern: "*_classified.fastq"

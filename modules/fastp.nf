@@ -1,5 +1,5 @@
 process FASTPLONG_CLEAN_READS {
-	label "clean reads"
+	label "clean_reads"
 	publishDir "${params.outdir}/QC/fastp", mode: 'copy'
 
 	input:

@@ -1,5 +1,5 @@
 process MINIMAP2_MAP_CATALOGUE {
-	label "map to mag catalogue"
+	label "map_mag_catalogue"
 	publishDir "${params.outdir}/bams", mode: 'copy', pattern: "*.bam"
 	publishDir "${params.outdir}/bams", mode: 'copy', pattern: "*.stats"
 	publishDir "${params.outdir}/bams", mode: 'copy', pattern: "*.idxstats"
@@ -32,7 +32,7 @@ process MINIMAP2_MAP_CATALOGUE {
 
 
 process MINIMAP2_REMOVE_HOST_READS {
-	label "remove host reads"
+	label "remove_host_reads"
 	publishDir "${params.outdir}/fastq/host_depleted", mode: 'copy', pattern: "*.fastq.gz"
 
 	input:

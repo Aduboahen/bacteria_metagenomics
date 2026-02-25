@@ -1,5 +1,5 @@
 process ALPHA_DIVERSITY {
-	label "alpha diversity"
+	label "alpha_diversity"
 	publishDir "${params.outdir}/diversity", mode: 'copy'
 
 	input:
@@ -16,7 +16,7 @@ process ALPHA_DIVERSITY {
 
 
 process BETA_DIVERSITY {
-	label "beta diversity"
+	label "beta_diversity"
 	publishDir "${params.outdir}/bracken/diversity", mode: 'copy'
 
 	input:

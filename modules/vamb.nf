@@ -1,5 +1,5 @@
 process VAMB_BINNING {
-	label "vamb binning"
+	label "vamb_binning"
 	publishDir "${params.outdir}", mode: 'copy'
 
 	input:
@@ -23,7 +23,7 @@ process VAMB_BINNING {
 }
 
 process VAMB_CONCAT {
-	label "vamb concat"
+	label "vamb_concat"
 	publishDir "${params.outdir}/mags", mode: 'copy', pattern: "*"
 
 	input:

@@ -1,5 +1,5 @@
 process GTDB_CLASSIFY {
-	label "gtdb classification"
+	label "gtdb_classify"
 	publishDir "${params.outdir}/classification", mode: 'copy'
 
 	input:
