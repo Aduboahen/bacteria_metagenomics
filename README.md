@@ -2,22 +2,22 @@
 
 ## Tools
 
-**fastplong**\
-**kraken2**\
-**bracken**\
-**flye**\
-**vamb**\
-**checkm**\
-**minimap2**\
-**gtdb-tk**\
+**fastplong**
+**kraken2**
+**bracken**
+**flye**
+**vamb**
+**checkm**
+**minimap2**
+**gtdb-tk**
 **abricate**
 
 ## Databases
-**k2_standard_16_GB**\
+
+**k2_standard_16_GB**
 **CheckM2**
 
 <!-- TODO add links for databses -->
-
 
 ## Usage
 
@@ -42,12 +42,12 @@ mamba create -n bacteria_meta -file checkm2.yml
 2. Create a directory for the databases; default: ./databases
 3. Create a directory for host genome, copy fasta file into it and generate indexes with minimap2 (minmap2 -d <host.mmi> <host.fasta.gz>); default hosts
 
-
 ### Run the pipeline
 
 Look in nextflow.config file to edit input, host genome, databses, and output directories
 
 Execute the workflow using the following command:
+
 ```bash
 nextflow run main.nf
 ```
@@ -69,6 +69,6 @@ nextflow run main.nf
 
 This project is licensed under the terms of the GNU GENERAL PUBLIC LICENSE.
 
-**Author**: James Osei-Mensa
+**Author**: [James Osei-Mensa](https://github.com/Aduboahen)
 
 **Affiliation**: Infectious Diseases Epidemiology Research Group (IDERG), Kumasi Centre for Collaborative Research in Tropical Medicine (KCCR)
