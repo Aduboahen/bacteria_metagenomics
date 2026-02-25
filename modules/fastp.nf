@@ -1,6 +1,6 @@
 process FASTPLONG_CLEAN_READS {
 	label "clean reads"
-	publishDir "${params.outdir}/qc/FASTPLONG_CLEAN_READS", mode: 'copy'
+	publishDir "${params.outdir}/QC/fastp", mode: 'copy'
 
 	input:
 	tuple val(sample_id), path (read) // 'Input read file (fastq)'
