@@ -3,6 +3,7 @@
 nextflow.enable.dsl = 2
 
 // module
+include { FASTCAT } from '../modules/fastcat'
 include { FASTPLONG_CLEAN_READS } from '../modules/fastp'
 include { KRAKEN2_ASSIGN_TAXA } from '../modules/kraken'
 include { MINIMAP2_REMOVE_HOST_READS } from '../modules/minimap2'
@@ -20,7 +21,8 @@ workflow taxa_assign_assembly {
 	KRAKEN2DB
 
 	main:
-	FASTPLONG_CLEAN_READS(fastq_ch, base_quality, read_length)
+	FASTCAT(fastq_ch)
+	FASTPLONG_CLEAN_READS(FASTCAT.out, base_quality, read_length)
 	MINIMAP2_REMOVE_HOST_READS(FASTPLONG_CLEAN_READS.out.read, hosts)
 	KRAKEN2_ASSIGN_TAXA(MINIMAP2_REMOVE_HOST_READS.out, KRAKEN2DB)
 	BRACKEN_ABUNDANCE(KRAKEN2_ASSIGN_TAXA.out.kraken_report, KRAKEN2DB)
