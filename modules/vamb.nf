@@ -16,7 +16,7 @@ process VAMB_BINNING {
 
 	script:
 	"""
-			source ~/.virtualenvs/vamb/bin/activate
+			source ${params.vamb_env}
 
 			vamb bin default --fasta ${mags_catalogue} --outdir "vamb" --bamdir bams --minfasta ${bin_size} -p ${params.threads} --seed 373
 		"""
@@ -35,9 +35,9 @@ process VAMB_CONCAT {
 
 	script:
 		"""
-			source ~/.virtualenvs/vamb/bin/activate
+			source ${params.vamb_env}
 			
-			python ~/repos/github/metagenome/scripts/vamb/src/concatenate.py mags_catalogue.fna ${mags_files}
+			python ${params.vamb_concat} mags_catalogue.fna ${mags_files}
 
 			minimap2 -d mags_catalogue.mmi mags_catalogue.fna
 		"""
