@@ -7,6 +7,7 @@ process FLYE_ASSEMBLE {
 
 	output:
 	path("${sample_id}/${sample_id}.assembly.fasta"), emit: mag_file
+	path ("${sample_id}/")
 
 	script:
 	"""
@@ -15,5 +16,7 @@ process FLYE_ASSEMBLE {
 		awk -v s="${sample_id}_" '/^>/ {\$0=">" s substr(\$0,2)} 1 ' ${sample_id}/assembly.fasta > ${sample_id}/assembly_renamed.fasta
 
 		mv "${sample_id}/assembly_renamed.fasta" "${sample_id}/${sample_id}.assembly.fasta"
+
+		rm "${sample_id}/assembly.fasta"
 		"""
 }
