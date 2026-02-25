@@ -1,6 +1,6 @@
 process FLYE_ASSEMBLE {
 	label "assembly"
-	publishDir "${params.outdir}/mags", mode: 'copy', pattern: "*"
+	publishDir "${params.outdir}/assembly", mode: 'copy', pattern: "*"
 
 	input:
 	tuple val(sample_id), path(read)

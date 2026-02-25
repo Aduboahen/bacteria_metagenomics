@@ -33,7 +33,7 @@ process MINIMAP2_MAP_CATALOGUE {
 
 process MINIMAP2_REMOVE_HOST_READS {
 	label "remove host reads"
-	publishDir "${params.outdir}/kraken/host_depleted", mode: 'copy', pattern: "*.fastq.gz"
+	publishDir "${params.outdir}/fastq/host_depleted", mode: 'copy', pattern: "*.fastq.gz"
 
 	input:
 	tuple val(sample_id), path(read)
