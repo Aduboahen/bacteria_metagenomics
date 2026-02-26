@@ -100,7 +100,7 @@ mamba create -n bacteria_meta -f main.yml
 mamba create -n bacteria_meta -f assembly.yml
 mamba create -n bacteria_meta -f checkm2.yml
 ```
-
+<!-- TODO add code for vamb repo clone and vamb venv -->
 ---
 
 ## Directory Structure
