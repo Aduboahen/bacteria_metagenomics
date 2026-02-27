@@ -13,7 +13,7 @@ A **Nextflow-based pipeline** for analysing **long-read bacterial metagenomic da
   - [Databases](#databases)
   - [Installation](#installation)
     - [Clone the Repository](#clone-the-repository)
-    - [Create Conda/Mamba Environments](#create-condamamba-environments)
+    - [Create pip/Conda/Mamba Environments](#create-pipcondamamba-environments)
   - [Directory Structure](#directory-structure)
   - [Sample Preparation](#sample-preparation)
   - [Running the Pipeline](#running-the-pipeline)
@@ -91,7 +91,7 @@ git clone https://github.com/Aduboahen/bacteria_metagenomics.git
 cd bacteria_metagenomics
 ```
 
-### Create Conda/Mamba Environments
+### Create pip/Conda/Mamba Environments
 
 Ensure `mamba` is installed, then create the required environments:
 
@@ -100,7 +100,26 @@ mamba create -n bacteria_meta -f main.yml
 mamba create -n bacteria_meta -f assembly.yml
 mamba create -n bacteria_meta -f checkm2.yml
 ```
-<!-- TODO add code for vamb repo clone and vamb venv -->
+
+Clone [vamb](https://github.com/RasmussenLab/vamb)
+
+```
+git clone https://github.com/RasmussenLab/vamb.git ./tools/vamb_scripts
+```
+
+Create vamb virtual environment
+```bash
+
+mkdir -p ./tools/vamb_env
+
+python3 -m venv ./tools/vamb_env
+
+source activate ./tools/vamb_env/bin/activate
+
+pip3 install vamb
+
+```
+
 ---
 
 ## Directory Structure
@@ -109,14 +128,14 @@ Recommended project structure:
 
 ```text
 bacteria_metagenomics/
-├── input/          # Raw FASTQ files
 ├── databases/      # Kraken2, CheckM2, and GTDB databases
-├── host/           # Host genome FASTA and minimap2 index
+├── host/           # Host genome FASTA and minimap2 index 
+├── input/          # Raw FASTQ files
+├── modules/        # Nextflow modules
 ├── results/        # Pipeline outputs
-├── modules/
-├── main.nf
-├── nextflow.config
-└── README.md
+├── sub_workflows/   # Sub workflows
+├── main.nf         # Nextflow workflow
+├── nextflow.config # Nextflow configuration
 ```
 
 ---
