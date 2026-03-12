@@ -13,7 +13,7 @@ process ABRICATE_CONTIGS {
     script:
     """
         abricate --threads ${params.threads} --csv --quiet ${mag_files} > raw_assembly_resistance_genes.csv
-        params.format_res --abricate raw_assembly_resistance_genes.csv
+        ${params.format_abricate} --abricate raw_assembly_resistance_genes.csv
         """
 }
 
@@ -32,6 +32,6 @@ process ABRICATE_BINS {
     script:
     """
         abricate --threads ${params.threads} --csv --quiet  ${mag_bins} > bins_resistance_genes.csv
-        params.format_res --abricate bins_resistance_genes.csv
+        ${params.format_abricate} --abricate bins_resistance_genes.csv
         """
 }
