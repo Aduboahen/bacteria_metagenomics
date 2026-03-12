@@ -2,10 +2,10 @@
 
 nextflow.enable.dsl = 2
 
-include { taxa_assign_assembly } from './workflows/assembly_abundance'
-include { create_mag_catalogue } from './workflows/mag_catalogue'
-include { mapping_mags } from './workflows/mapping'
-include { bin_classify } from './workflows/bin_classify_amr'
+include { taxa_assign_assembly } from './sub_workflows/assembly_abundance'
+include { create_mag_catalogue } from './sub_workflows/mag_catalogue'
+include { mapping_mags } from './sub_workflows/mapping'
+include { bin_classify } from './sub_workflows/bin_classify_amr'
 
 
 workflow {
