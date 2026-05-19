@@ -5,6 +5,7 @@ A **Nextflow-based pipeline** for analysing **long-read bacterial metagenomic da
 ---
 
 ## Table of Contents
+
 - [Metagenome Analysis Pipeline for Long-Read Sequencing](#metagenome-analysis-pipeline-for-long-read-sequencing)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
@@ -20,7 +21,6 @@ A **Nextflow-based pipeline** for analysing **long-read bacterial metagenomic da
   - [Outputs](#outputs)
   - [License](#license)
   - [Author \& Affiliation](#author--affiliation)
-
 
 ---
 
@@ -79,7 +79,9 @@ The following databases are required:
 * [**Kraken2 standard database (16 GB)**](https://genome-idx.s3.amazonaws.com/kraken/k2_standard_16_GB_20251015.tar.gz)
 * **CheckM2 database**: [Setup Instructions](https://github.com/chklovski/CheckM2)
 * **GTDB**
+
 <!-- TODO add GTD link -->
+
 ---
 
 ## Installation
@@ -93,13 +95,20 @@ cd bacteria_metagenomics
 
 ### Create pip/Conda/Mamba Environments
 
-Ensure `mamba` is installed, then create the required environments:
+Ensure `mamba` is installed, then create the required environments or use `conda` if you prefer:
 
 ```bash
-mamba create -n bacteria_meta -f main.yml
-mamba create -n bacteria_meta -f assembly.yml
-mamba create -n bacteria_meta -f checkm2.yml
+mamba create -f main.yml
 ```
+
+```bash
+mamba create -f assembly.yml
+```
+
+```bash
+mamba create -f checkm2.yml
+```
+
 
 Clone [vamb](https://github.com/RasmussenLab/vamb)
 
@@ -108,16 +117,23 @@ git clone https://github.com/RasmussenLab/vamb.git ./tools/vamb_scripts
 ```
 
 Create vamb virtual environment
+
+Ensure Python `venv` is installed
+
 ```bash
-
 mkdir -p ./tools/vamb_env
+```
 
+```bash
 python3 -m venv ./tools/vamb_env
+```
 
-source activate ./tools/vamb_env/bin/activate
+```bash
+source ./tools/vamb_env/bin/activate
+```
 
+```bash
 pip3 install vamb
-
 ```
 
 ---
