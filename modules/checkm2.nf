@@ -1,4 +1,6 @@
 process CHECKM2_BIN_QC {
+	// run checkm2 on binned assemblies to
+	// determine quality of bins present in metagenome
 	label "checkm2_bin_qc"
 	publishDir "${params.outdir}/QC/", mode: 'copy'
 
