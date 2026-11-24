@@ -1,4 +1,5 @@
 process ALPHA_DIVERSITY {
+	// calculate alpha diversity from bracken files
 	label "alpha_diversity"
 	publishDir "${params.outdir}/diversity", mode: 'copy'
 
@@ -16,6 +17,7 @@ process ALPHA_DIVERSITY {
 
 
 process BETA_DIVERSITY {
+	// calculate beta diversity from bracken files
 	label "beta_diversity"
 	publishDir "${params.outdir}/bracken/diversity", mode: 'copy'
 
