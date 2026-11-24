@@ -1,6 +1,6 @@
 process GTDB_CLASSIFY {
 	label "gtdb_classify"
-	publishDir "${params.outdir}/classification", mode: 'copy'
+	publishDir "${params.outdir}/classification", mode: 'link'
 
 	input:
 		path bins // MAG bins from vamb

@@ -1,7 +1,7 @@
 process FASTPLONG_CLEAN_READS {
 	label "clean_reads"
-	publishDir "${params.outdir}/QC/fastp", mode: 'copy'
-	publishDir "${params.outdir}/fastq/fastq", mode: 'copy', pattern: '*.fastq.gz'
+	publishDir "${params.outdir}/QC/fastp", mode: 'link'
+	publishDir "${params.outdir}/fastq/fastq", mode: 'link', pattern: '*.fastq.gz'
 
 
 	input:

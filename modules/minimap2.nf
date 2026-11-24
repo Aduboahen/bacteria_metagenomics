@@ -1,9 +1,9 @@
 process MINIMAP2_MAP_CATALOGUE {
 	label "map_mag_catalogue"
-	publishDir "${params.outdir}/bams", mode: 'copy', pattern: "*.bam"
-	publishDir "${params.outdir}/bams", mode: 'copy', pattern: "*.stats"
-	publishDir "${params.outdir}/bams", mode: 'copy', pattern: "*.idxstats"
-	publishDir "${params.outdir}/bams", mode: 'copy', pattern: "*.bai"
+	publishDir "${params.outdir}/bams", mode: 'link', pattern: "*.bam"
+	publishDir "${params.outdir}/bams", mode: 'link', pattern: "*.stats"
+	publishDir "${params.outdir}/bams", mode: 'link', pattern: "*.idxstats"
+	publishDir "${params.outdir}/bams", mode: 'link', pattern: "*.bai"
 
 	input:
 	path mags_catalogue
@@ -33,7 +33,7 @@ process MINIMAP2_MAP_CATALOGUE {
 
 process MINIMAP2_REMOVE_HOST_READS {
 	label "remove_host_reads"
-	publishDir "${params.outdir}/fastq/host_depleted", mode: 'copy', pattern: "*.fastq.gz"
+	publishDir "${params.outdir}/fastq/host_depleted", mode: 'link', pattern: "*.fastq.gz"
 
 	input:
 	tuple val(sample_id), path(read)

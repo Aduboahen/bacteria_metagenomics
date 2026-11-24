@@ -1,6 +1,6 @@
 process KRONA_VISUALISE {
 	label "krona"
-	publishDir "${params.outdir}/krona", mode: 'copy', pattern: "*"
+	publishDir "${params.outdir}/krona", mode: 'link', pattern: "*"
 
 	input:
 	tuple val(sample_id), path(bracken_report)

@@ -1,6 +1,6 @@
 process VAMB_BINNING {
 	label "vamb_binning"
-	publishDir "${params.outdir}", mode: 'copy'
+	publishDir "${params.outdir}", mode: 'link'
 
 	input:
 	path (mags_catalogue)
@@ -24,7 +24,7 @@ process VAMB_BINNING {
 
 process VAMB_CONCAT {
 	label "vamb_concat"
-	publishDir "${params.outdir}/mags", mode: 'copy', pattern: "*"
+	publishDir "${params.outdir}/mags", mode: 'link', pattern: "*"
 
 	input:
 		path mags_files // 'Path to saamebled MAGs files for all samples'

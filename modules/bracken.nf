@@ -1,8 +1,8 @@
 process BRACKEN_ABUNDANCE {
 	label "bracken"
 	// run bracken on kraken2 report to determine abundance of taxa in metagenome
-	publishDir "${params.outdir}/bracken/abundance", mode: 'copy', pattern: "*.bracken"
-	publishDir "${params.outdir}/bracken/report", mode: 'copy', pattern: "*.breport"
+	publishDir "${params.outdir}/bracken/abundance", mode: 'link', pattern: "*.bracken"
+	publishDir "${params.outdir}/bracken/report", mode: 'link', pattern: "*.breport"
 
 	input:
 	tuple val(sample_id), path(kraken_report)
