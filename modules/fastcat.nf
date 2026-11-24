@@ -1,4 +1,5 @@
 process FASTCAT {
+	// concat all fastq files for a sample into a single gzipped fastq file
 	label "concat_fastq"
 
 	input:
