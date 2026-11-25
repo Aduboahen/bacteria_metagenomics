@@ -1,0 +1,110 @@
+flowchart TB
+    subgraph " "
+    v0["channel.fromPath"]
+    v3["phred_qual"]
+    v4["read_len"]
+    v8["hosts"]
+    v10["KRAKEN2DB"]
+    v15["KRAKEN2DB"]
+    v38["bin_size"]
+    v41["CHECKMDB"]
+    end
+    subgraph "taxa_assign_assembly [taxa_assign_assembly]"
+    v2(["FASTCAT"])
+    v5(["FASTPLONG_CLEAN_READS"])
+    v9(["MINIMAP2_REMOVE_HOST_READS"])
+    v11(["KRAKEN2_ASSIGN_TAXA"])
+    v16(["BRACKEN_ABUNDANCE"])
+    v17(["KRONA_VISUALISE"])
+    v20(["ALPHA_DIVERSITY"])
+    v22(["FLYE_ASSEMBLE"])
+    end
+    subgraph " "
+    v6[" "]
+    v7[" "]
+    v12[" "]
+    v13[" "]
+    v14[" "]
+    v18[" "]
+    v19[" "]
+    v21[" "]
+    v23[" "]
+    v26[" "]
+    v28[" "]
+    v30[" "]
+    v31[" "]
+    v32[" "]
+    v37[" "]
+    v40[" "]
+    v43[" "]
+    v46[" "]
+    v48[" "]
+    end
+    subgraph "create_contigs_catalogue [create_contigs_catalogue]"
+    v25(["VAMB_CONCAT"])
+    v27(["ABRICATE_CONTIGS"])
+    end
+    subgraph "mapping_mags [mapping_mags]"
+    v29(["MINIMAP2_MAP_CATALOGUE"])
+    end
+    subgraph "bin_classify [bin_classify]"
+    v36(["BETA_DIVERSITY"])
+    v39(["VAMB_BINNING"])
+    v42(["CHECKM2_BIN_QC"])
+    v45(["ABRICATE_BINS"])
+    v47(["GTDB_CLASSIFY"])
+    v44(( ))
+    end
+    v1(( ))
+    v24(( ))
+    v33(( ))
+    v35(( ))
+    v0 --> v1
+    v1 --> v2
+    v2 --> v5
+    v3 --> v5
+    v4 --> v5
+    v5 --> v9
+    v5 --> v7
+    v5 --> v6
+    v8 --> v9
+    v9 --> v11
+    v9 --> v22
+    v9 --> v29
+    v10 --> v11
+    v11 --> v14
+    v11 --> v16
+    v11 --> v13
+    v11 --> v12
+    v15 --> v16
+    v16 --> v17
+    v16 --> v20
+    v16 --> v33
+    v17 --> v19
+    v17 --> v18
+    v20 --> v21
+    v22 --> v23
+    v22 --> v24
+    v24 --> v25
+    v25 --> v29
+    v25 --> v26
+    v25 --> v39
+    v24 --> v27
+    v27 --> v28
+    v29 --> v32
+    v29 --> v31
+    v29 --> v30
+    v29 --> v35
+    v33 --> v36
+    v36 --> v37
+    v38 --> v39
+    v35 --> v39
+    v39 --> v42
+    v39 --> v40
+    v39 --> v47
+    v39 --> v44
+    v41 --> v42
+    v42 --> v43
+    v44 --> v45
+    v45 --> v46
+    v47 --> v48
