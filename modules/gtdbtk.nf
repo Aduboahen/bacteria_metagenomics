@@ -1,7 +1,7 @@
 process GTDB_CLASSIFY {
     // classify assembled genomes
 
-    publishDir "${params.outdir}/classification", mode: 'link'
+    publishDir "${params.outdir}_${params.run_date}/classification", mode: 'link'
 
     input:
     path bins // MAG bins from vamb

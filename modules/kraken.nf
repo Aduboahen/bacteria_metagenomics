@@ -1,14 +1,13 @@
 process KRAKEN2_ASSIGN_TAXA {
     // assign taxa in raw reads
     tag "${sample_id}"
-    publishDir "${params.outdir}/kraken/abundance", mode: 'link', pattern: "*kraken2"
-    publishDir "${params.outdir}/kraken/report", mode: 'link', pattern: "*.k2report"
-    publishDir "${params.outdir}/kraken/classified", mode: 'link', pattern: "*_classified.fastq"
-    publishDir "${params.outdir}/kraken/unclassified", mode: 'link', pattern: "*_unclassified.fastq"
+    publishDir "${params.outdir}_${params.run_date}/kraken/abundance", mode: 'link', pattern: "*kraken2"
+    publishDir "${params.outdir}_${params.run_date}/kraken/report", mode: 'link', pattern: "*.k2report"
+    publishDir "${params.outdir}_${params.run_date}/kraken/classified", mode: 'link', pattern: "*_classified.fastq"
+    publishDir "${params.outdir}_${params.run_date}/kraken/unclassified", mode: 'link', pattern: "*_unclassified.fastq"
 
     input:
     tuple val(sample_id), path(read)
-    // 'Input read file (fastq)'
     path KRAKEN2DB
 
     output:
@@ -23,6 +22,6 @@ process KRAKEN2_ASSIGN_TAXA {
    			--classified-out ${sample_id}_classified.fastq \
    			--unclassified-out ${sample_id}_unclassified.fastq \
    			--output ${sample_id}.kraken2 --report-minimizer-data --use-names \
-   			--threads ${params.threads} --memory-mapping ${read}
+   			--threads ${task.cpus} --memory-mapping ${read}
    		"""
 }
