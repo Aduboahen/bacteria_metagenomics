@@ -6,7 +6,7 @@ nextflow.enable.dsl = 2
 include { VAMB_CONCAT } from '../modules/vamb'
 include { ABRICATE_CONTIGS } from '../modules/abricate'
 
-workflow create_mag_catalogue {
+workflow create_contigs_catalogue {
 	take:
 	contigs_files
 
