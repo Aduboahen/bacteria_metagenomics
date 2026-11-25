@@ -8,12 +8,12 @@ include { ABRICATE_CONTIGS } from '../modules/abricate'
 
 workflow create_mag_catalogue {
 	take:
-	raw_mags
+	contigs_files
 
 	main:
-	VAMB_CONCAT(raw_mags)
-	ABRICATE_CONTIGS(raw_mags)
+	VAMB_CONCAT(contigs_files)
+	ABRICATE_CONTIGS(contigs_files)
 
 	emit:
-	mags_catalogue = VAMB_CONCAT.out.mags_catalogue
+	mags_catalogue = VAMB_CONCAT.out.contigs_catalogue
 }
