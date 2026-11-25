@@ -16,7 +16,7 @@ dependencies:
   - certifi=2025.10.5=pyhd8ed1ab_0
   - cffi=2.0.0=py312h35888ee_0
   - charset-normalizer=3.4.4=pyhd8ed1ab_0
-  - checkm2=1.1.0=pyh7e72e81_1
+  - checkm2
   - colorama=0.4.6=pyhd8ed1ab_1
   - diamond=2.1.11=h5ca1c30_2
   - flatbuffers=24.3.25=h59595ed_0
