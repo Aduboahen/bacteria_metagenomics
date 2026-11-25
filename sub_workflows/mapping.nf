@@ -7,11 +7,11 @@ include { MINIMAP2_MAP_CATALOGUE } from '../modules/minimap2'
 
 workflow mapping_mags{
 	take:
-	mags_catalogue
+	contigs_catalogue
 	host_dep_reads
 
 	main:
-	MINIMAP2_MAP_CATALOGUE(mags_catalogue, host_dep_reads)
+	MINIMAP2_MAP_CATALOGUE(contigs_catalogue, host_dep_reads)
 
 	emit:
 	bam = MINIMAP2_MAP_CATALOGUE.out.bam

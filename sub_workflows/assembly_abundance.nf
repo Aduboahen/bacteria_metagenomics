@@ -31,7 +31,7 @@ workflow taxa_assign_assembly {
 	FLYE_ASSEMBLE(MINIMAP2_REMOVE_HOST_READS.out)
 
 	emit:
-	mags_file = FLYE_ASSEMBLE.out.mag_file
+	contigs_file = FLYE_ASSEMBLE.out.contigs_file
 	host_dep_reads = MINIMAP2_REMOVE_HOST_READS.out
 	bracken_file = BRACKEN_ABUNDANCE.out.bracken_file
 }
