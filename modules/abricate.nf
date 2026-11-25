@@ -3,36 +3,36 @@ process ABRICATE_CONTIGS {
     // determine resistance genes present in metagenome
 
     label 'abricate'
-    publishDir "${params.outdir}/resistance", mode: 'link', pattern: '*.csv'
+    publishDir "${params.outdir}_${params.run_date}/resistance", mode: 'link', pattern: '*.csv'
 
     input:
-    path mag_files
+    path contigs_files
 
     output:
     path "raw_assembly_resistance_genes.csv"
 
     script:
     """
-        abricate --threads ${params.threads} --csv --quiet ${mag_files} > raw_assembly_resistance_genes.csv
+        abricate --threads ${task.cpus} --csv --quiet ${contigs_files} > raw_assembly_resistance_genes.csv
         ${params.format_abricate} --abricate raw_assembly_resistance_genes.csv
         """
 }
 
-process ABRICATE_BINS {
+process ABRICATE_MAGS {
     // run abricate on binned assemblies to
     // determine resistance genes present in metagenome
     label 'abricate'
-    publishDir "${params.outdir}/resistance", mode: 'link', pattern: '*.csv'
+    publishDir "${params.outdir}_${params.run_date}/resistance", mode: 'link', pattern: '*.csv'
 
     input:
     path mag_bins
 
     output:
-    path "bins_resistance_genes.csv"
+    path "mags_resistance_genes.csv"
 
     script:
     """
-        abricate --threads ${params.threads} --csv --quiet  ${mag_bins} > bins_resistance_genes.csv
-        ${params.format_abricate} --abricate bins_resistance_genes.csv
+        abricate --threads ${task.cpus} --csv --quiet  ${mag_bins} > mags_resistance_genes.csv
+        ${params.format_abricate} --abricate mags_resistance_genes.csv
         """
 }
