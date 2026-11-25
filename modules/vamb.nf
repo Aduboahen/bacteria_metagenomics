@@ -1,6 +1,6 @@
 process VAMB_BINNING {
     label "vamb"
-    publishDir "${params.outdir}_${params.run_date}", mode: 'link'
+    publishDir "${params.outdir}/${params.run_date}", mode: 'link'
 
     input:
     path contigs_catalogue
@@ -22,7 +22,7 @@ process VAMB_BINNING {
 
 process VAMB_CONCAT {
     label "vamb"
-    publishDir "${params.outdir}_${params.run_date}/contigs", mode: 'link', pattern: "*"
+    publishDir "${params.outdir}/${params.run_date}/contigs", mode: 'link', pattern: "*"
 
     input:
     path contigs_files // 'Path to saamebled contigs files for all samples'

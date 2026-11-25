@@ -2,7 +2,7 @@ process MINIMAP2_REMOVE_HOST_READS {
     // remove host reads
     tag "${sample_id}"
     label "mapping"
-    publishDir "${params.outdir}_${params.run_date}/fastq/host_depleted", mode: 'link', pattern: "*.fastq.gz"
+    publishDir "${params.outdir}/${params.run_date}/fastq/host_depleted", mode: 'link', pattern: "*.fastq.gz"
 
     input:
     tuple val(sample_id), path(read)
@@ -28,10 +28,10 @@ process MINIMAP2_MAP_CATALOGUE {
     // map host depleted reads to mag catalogue
     tag "${sample_id}"
     label "mapping"
-    publishDir "${params.outdir}_${params.run_date}/bams", mode: 'link', pattern: "*.bam"
-    publishDir "${params.outdir}_${params.run_date}/bams", mode: 'link', pattern: "*.stats"
-    publishDir "${params.outdir}_${params.run_date}/bams", mode: 'link', pattern: "*.idxstats"
-    publishDir "${params.outdir}_${params.run_date}/bams", mode: 'link', pattern: "*.bai"
+    publishDir "${params.outdir}/${params.run_date}/bams", mode: 'link', pattern: "*.bam"
+    publishDir "${params.outdir}/${params.run_date}/bams", mode: 'link', pattern: "*.stats"
+    publishDir "${params.outdir}/${params.run_date}/bams", mode: 'link', pattern: "*.idxstats"
+    publishDir "${params.outdir}/${params.run_date}/bams", mode: 'link', pattern: "*.bai"
 
     input:
     path contigs_catalogue

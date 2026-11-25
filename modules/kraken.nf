@@ -1,10 +1,10 @@
 process KRAKEN2_ASSIGN_TAXA {
     // assign taxa in raw reads
     tag "${sample_id}"
-    publishDir "${params.outdir}_${params.run_date}/kraken/abundance", mode: 'link', pattern: "*kraken2"
-    publishDir "${params.outdir}_${params.run_date}/kraken/report", mode: 'link', pattern: "*.k2report"
-    publishDir "${params.outdir}_${params.run_date}/kraken/classified", mode: 'link', pattern: "*_classified.fastq"
-    publishDir "${params.outdir}_${params.run_date}/kraken/unclassified", mode: 'link', pattern: "*_unclassified.fastq"
+    publishDir "${params.outdir}/${params.run_date}/kraken/abundance", mode: 'link', pattern: "*kraken2"
+    publishDir "${params.outdir}/${params.run_date}/kraken/report", mode: 'link', pattern: "*.k2report"
+    publishDir "${params.outdir}/${params.run_date}/kraken/classified", mode: 'link', pattern: "*_classified.fastq"
+    publishDir "${params.outdir}/${params.run_date}/kraken/unclassified", mode: 'link', pattern: "*_unclassified.fastq"
 
     input:
     tuple val(sample_id), path(read)

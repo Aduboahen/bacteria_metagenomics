@@ -1,7 +1,7 @@
 process KRONA_VISUALISE {
     // visualise abundance
     tag "${sample_id}"
-    publishDir "${params.outdir}_${params.run_date}/krona", mode: 'link', pattern: "*"
+    publishDir "${params.outdir}/${params.run_date}/krona", mode: 'link', pattern: "*"
 
     input:
     tuple val(sample_id), path(bracken_report)

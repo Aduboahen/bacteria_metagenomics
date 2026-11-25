@@ -1,7 +1,7 @@
 process FASTPLONG_CLEAN_READS {
     tag "${sample_id}"
-    publishDir "${params.outdir}_${params.run_date}/QC/fastp", mode: 'link'
-    publishDir "${params.outdir}_${params.run_date}/fastq/fastq", mode: 'link', pattern: '*.fastq.gz'
+    publishDir "${params.outdir}/${params.run_date}/QC/fastp", mode: 'link'
+    publishDir "${params.outdir}/${params.run_date}/fastq/fastq", mode: 'link', pattern: '*.fastq.gz'
 
     input:
     tuple val(sample_id), path(read) // 'Input read file (fastq)'
