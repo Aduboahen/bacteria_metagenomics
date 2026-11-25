@@ -12,14 +12,14 @@ include { ABRICATE_MAGS } from '../modules/abricate'
 workflow bin_classify {
 	take:
 	bracken_files
-	mags_catalogue
+	contigs_catalogue
 	bams
 	bin_size
 	CHECKMDB
 
 	main:
 	BETA_DIVERSITY(bracken_files)
-	VAMB_BINNING(mags_catalogue, bams, bin_size)
+	VAMB_BINNING(contigs_catalogue, bams, bin_size)
 	CHECKM2_BIN_QC(VAMB_BINNING.out.bins, CHECKMDB)
 	ABRICATE_MAGS(VAMB_BINNING.out.fasta.collect())
 	GTDB_CLASSIFY(VAMB_BINNING.out.bins)

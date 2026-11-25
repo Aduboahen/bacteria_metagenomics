@@ -34,8 +34,7 @@ process MINIMAP2_MAP_CATALOGUE {
     publishDir "${params.outdir}_${params.run_date}/bams", mode: 'link', pattern: "*.bai"
 
     input:
-    path mags_catalogue
-    // 'Input MAGs file (fna)'
+    path contigs_catalogue
     tuple val(sample_id), path(read)
 
     output:
@@ -46,7 +45,7 @@ process MINIMAP2_MAP_CATALOGUE {
 
     script:
     """
-   		minimap2 -ax map-ont -t ${task.cpus} ${mags_catalogue} ${read} | samtools sort - | samtools view -F 3844 -b -o ${sample_id}.bam -@ ${task.cpus}
+   		minimap2 -ax map-ont -t ${task.cpus} ${contigs_catalogue} ${read} | samtools sort - | samtools view -F 3844 -b -o ${sample_id}.bam -@ ${task.cpus}
 
    		samtools index ${sample_id}.bam > ${sample_id}.bam.bai
 

@@ -15,5 +15,5 @@ workflow create_contigs_catalogue {
 	ABRICATE_CONTIGS(contigs_files)
 
 	emit:
-	mags_catalogue = VAMB_CONCAT.out.contigs_catalogue
+	contigs_catalogue = VAMB_CONCAT.out.contigs_catalogue
 }
