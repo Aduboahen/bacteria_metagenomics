@@ -20,7 +20,7 @@ process ALPHA_DIVERSITY {
 process BETA_DIVERSITY {
     // calculate beta diversity from bracken files
     label "diversity"
-    publishDir "${params.outdir}/bracken/diversity", mode: 'link'
+    publishDir "${params.outdir}/diversity", mode: 'link'
 
     input:
     path bracken_files
