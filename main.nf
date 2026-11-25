@@ -3,7 +3,7 @@
 nextflow.enable.dsl = 2
 
 include { taxa_assign_assembly } from './sub_workflows/assembly_abundance'
-include { create_mag_catalogue } from './sub_workflows/mag_catalogue'
+include { create_contigs_catalogue } from './sub_workflows/contigs_catalogue'
 include { mapping_mags } from './sub_workflows/mapping'
 include { bin_classify } from './sub_workflows/bin_classify_amr'
 
@@ -34,10 +34,10 @@ workflow {
 		params.KRAKEN2DB,
 	)
 
-	create_mag_catalogue(taxa_assign_assembly.out.mags_file.collect())
+	create_contigs_catalogue(taxa_assign_assembly.out.contigs_file.collect())
 
 	mapping_mags(
-		create_mag_catalogue.out.mags_catalogue,
+		create_contigs_catalogue.out.contigs_catalogue,
 		taxa_assign_assembly.out.host_dep_reads,
 	)
 
@@ -47,7 +47,7 @@ workflow {
 
 	bin_classify(
 		all_bracken,
-		create_mag_catalogue.out.mags_catalogue,
+		create_contigs_catalogue.out.contigs_catalogue,
 		mapping_mags.out.bam.collect(),
 		params.bin_size,
 		params.CHECKMDB,
