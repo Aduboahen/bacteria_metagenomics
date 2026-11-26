@@ -11,6 +11,6 @@ process GTDB_CLASSIFY {
 
     script:
     """
-  		gtdbtk classify_wf --genome_dir ${bins} --out_dir gtdb --cpus ${task.cpus}
+  		gtdbtk classify_wf --genome_dir ${bins} --out_dir gtdb --cpus ${task.cpus} --pplacer_cpus 1
   		"""
 }
