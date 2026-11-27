@@ -8,7 +8,6 @@ process KRAKEN2_ASSIGN_TAXA {
 
     input:
     tuple val(sample_id), path(read)
-    path KRAKEN2DB
 
     output:
     path "${sample_id}.kraken2", emit: taxa_file // 'Assigned taxa results'
@@ -18,7 +17,7 @@ process KRAKEN2_ASSIGN_TAXA {
 
     script:
     """
-   			kraken2 --db ${KRAKEN2DB} --report ${sample_id}.k2report \
+   			kraken2 --db ${params.KRAKEN2DB} --report ${sample_id}.k2report \
    			--classified-out ${sample_id}_classified.fastq \
    			--unclassified-out ${sample_id}_unclassified.fastq \
    			--output ${sample_id}.kraken2 --report-minimizer-data --use-names \
