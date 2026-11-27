@@ -1,7 +1,7 @@
 process FLYE_ASSEMBLE {
     // asseble genomes with flye
     tag "${sample_id}"
-    publishDir "${params.outdir}/${params.run_date}/assembly", mode: 'link', pattern: "*"
+    publishDir "${params.outdir}/${params.run_date}/assembly", mode: 'copy', pattern: "*"
 
     input:
     tuple val(sample_id), path(read)
