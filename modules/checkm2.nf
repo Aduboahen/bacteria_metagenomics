@@ -6,7 +6,6 @@ process CHECKM2_BIN_QC {
 
     input:
     path bin_dir
-    path CHECKMDB
 
     output:
     path "checkm"
@@ -14,7 +13,7 @@ process CHECKM2_BIN_QC {
     script:
     """
    		checkm2 predict --input ${bin_dir} --output-directory "checkm" \
-   		--database_path ${CHECKMDB} \
+   		--database_path ${params.CHECKMDB} \
    		--allmodels --threads ${task.cpus} --force
 
    		# dRep dereplicate ${params.outdir}/${params.run_date}/drep -g ${bin_dir} -p ${task.cpus}
