@@ -50,6 +50,5 @@ workflow {
 		create_contigs_catalogue.out.contigs_catalogue,
 		mapping_mags.out.bam.collect(),
 		params.bin_size,
-		params.CHECKMDB,
 	)
 }
