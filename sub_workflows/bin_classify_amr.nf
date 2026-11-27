@@ -20,7 +20,7 @@ workflow bin_classify {
 	main:
 	BETA_DIVERSITY(bracken_files)
 	VAMB_BINNING(contigs_catalogue, bams, bin_size)
-	CHECKM2_BIN_QC(VAMB_BINNING.out.bins, CHECKMDB)
+	CHECKM2_BIN_QC(VAMB_BINNING.out.bins)
 	ABRICATE_MAGS(VAMB_BINNING.out.fasta.collect())
 	GTDB_CLASSIFY(VAMB_BINNING.out.bins)
 
