@@ -15,7 +15,6 @@ workflow bin_classify {
 	contigs_catalogue
 	bams
 	bin_size
-	CHECKMDB
 
 	main:
 	BETA_DIVERSITY(bracken_files)
